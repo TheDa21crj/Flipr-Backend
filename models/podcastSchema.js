@@ -23,6 +23,22 @@ const podcastSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  episodes: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Episode",
+  },
+  season: {
+    required: true,
+    default: 1,
+  },
+  thumbnail: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: "Number",
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,
