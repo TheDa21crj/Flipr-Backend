@@ -32,6 +32,11 @@ const podcastSchema = new mongoose.Schema({
     required: true,
     default: 1,
   },
+  subscribe: {
+    type: "Number",
+    required: true,
+    default: 0,
+  },
   thumbnail: {
     type: String,
     required: true,
