@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 // routes
 app.use("/api/user", require("./routes/user"));
-// app.use("/api/attendance", require("./routes/save"));
+app.use("/api/podcast", require("./routes/podcast"));
 
 // test route
 app.get("/test", (req, res) => {
