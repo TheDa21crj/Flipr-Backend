@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const gravatar = require("gravatar");
 const bcrypt = require("bcrypt");
 
+// Public || New User Register
 const register = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
