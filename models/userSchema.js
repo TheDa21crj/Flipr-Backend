@@ -22,23 +22,10 @@ const userSchema = new mongoose.Schema({
   //     },
   //   },
   // ],
-  // portfolio: [
-  //   {
-  //     link: {
-  //       type: "string",
-  //       // required: true,
-  //     },
-  //   },
-  // ],
-  // Linkedin: {
-  //   type: "string",
-  //   required: true,
-  // },
   password: {
     type: "string",
     required: true,
   },
-  // College: { type: "string", required: true },
   avatar: {
     type: "string",
     required: true,
