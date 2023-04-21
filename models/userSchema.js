@@ -10,18 +10,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // competition: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Competition",
-  // },
-  // skills: [
-  //   {
-  //     name: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //   },
-  // ],
+  podcast: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Podcast",
+      subscribed: {
+        type: "Boolean",
+        default: false,
+      },
+      watching: {
+        type: "string",
+      },
+      rating: {
+        type: "Number",
+        default: 0,
+      },
+    },
+  ],
   password: {
     type: "string",
     required: true,
