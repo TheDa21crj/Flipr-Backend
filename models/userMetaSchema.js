@@ -10,17 +10,6 @@ const userMetaSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Podcast",
-      subscribed: {
-        type: "Boolean",
-        default: false,
-      },
-      watching: {
-        type: "string",
-      },
-      rating: {
-        type: "Number",
-        default: 0,
-      },
     },
   ],
   password: {
