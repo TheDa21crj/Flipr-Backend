@@ -11,7 +11,14 @@ const register = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { name, email, password, skills, Linkedin, College } = req.body;
+  const {
+    name,
+    email,
+    password,
+    //  skills,
+    // Linkedin,
+    // College,
+  } = req.body;
 
   let users;
   try {
@@ -39,9 +46,9 @@ const register = async (req, res, next) => {
       email: email,
       password: password,
       avatar: avatar,
-      skills,
-      Linkedin,
-      College,
+      // skills,
+      // Linkedin,
+      // College,
     });
 
     try {
@@ -84,6 +91,7 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   var validateEmail;
+
   try {
     validateEmail = await user.findOne({ email });
 
