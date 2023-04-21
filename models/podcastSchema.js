@@ -45,15 +45,15 @@ const podcastSchema = new mongoose.Schema({
     type: "Number",
     required: true,
   },
-  tags: [
+  tag: [
     {
-      type: "string",
+      type: String,
       required: true,
     },
   ],
   category: [
     {
-      type: "string",
+      type: String,
       required: true,
     },
   ],
