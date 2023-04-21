@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
+const episodeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -29,6 +29,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const userList = new mongoose.model("Users", userSchema);
+const episodeList = new mongoose.model("Episode", episodeSchema);
 
-module.exports = userList;
+module.exports = episodeList;
