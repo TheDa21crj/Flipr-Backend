@@ -2,50 +2,21 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
-  email: {
+  des: {
     type: String,
     required: true,
   },
-  podcast: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Podcast",
-      subscribed: {
-        type: "Boolean",
-        default: false,
-      },
-      watching: {
-        type: "string",
-      },
-      rating: {
-        type: "Number",
-        default: 0,
-      },
-    },
-  ],
-  password: {
-    type: String,
-    required: true,
-  },
-  avatar: {
-    type: String,
-    required: true,
-  },
-  bio: {
-    type: String,
-    default: "",
-  },
-  userMetadata: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "UserMeta",
-  },
-  createdPodcast: {
+  podcast: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Podcast",
+  },
+  link: {
+    type: String,
+    required: true,
   },
   date: {
     type: Date,
