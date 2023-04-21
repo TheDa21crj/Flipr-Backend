@@ -8,8 +8,22 @@ const userMetaSchema = new mongoose.Schema({
   },
   podcast: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Podcast",
+      podcastID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Podcast",
+      },
+      episodeID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Episode",
+      },
+      watchTime: {
+        type: String,
+        default: "00:00",
+      },
+      completed: {
+        type: "Boolean",
+        default: false,
+      },
     },
   ],
   password: {
