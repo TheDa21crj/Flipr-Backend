@@ -32,7 +32,7 @@ app.use(express.json({ extended: false }));
 app.use(cookieParser());
 
 // routes
-// app.use("/api/user", require("./routes/user"));
+app.use("/api/user", require("./routes/user"));
 // app.use("/api/attendance", require("./routes/save"));
 
 // test route
