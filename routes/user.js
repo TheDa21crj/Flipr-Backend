@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/user/userController");
+// const userController = require("../controllers/user/userController");
 const loginController = require("../controllers/login/loginController");
 const auth = require("../middleWare/auth");
 const { check, validationResult } = require("express-validator");
@@ -26,10 +26,10 @@ router.post(
 router.use(auth);
 
 // Public || Get user Data
-router.post(
-  "/",
-  [check("email", "email is Required").not().isEmpty()],
-  userController.getUser
-);
+// router.post(
+//   "/",
+//   [check("email", "email is Required").not().isEmpty()],
+//   userController.getUser
+// );
 
 module.exports = router;
