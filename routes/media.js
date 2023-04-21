@@ -4,6 +4,8 @@ const auth = require("../middleWare/auth");
 const mediaController = require("./../controllers/upload/mediaController");
 const { check, validationResult } = require("express-validator");
 const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -36,7 +38,7 @@ const upload = multer({
 });
 
 // auth
-router.use(auth);
+// router.use(auth);
 
 //get all media
 router.get("/all", mediaController.getAll);
