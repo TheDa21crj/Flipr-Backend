@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const loginController = require("../controllers/login/loginController");
 const auth = require("../middleWare/auth");
+const mediaController = require("./../controllers/upload/mediaController");
 const { check, validationResult } = require("express-validator");
 
 const storage = multer.diskStorage({
