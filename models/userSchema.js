@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserMeta",
   },
+  createdPodcast: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Podcast",
+  },
   date: {
     type: Date,
     default: Date.now,
