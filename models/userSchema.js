@@ -35,6 +35,14 @@ const userSchema = new mongoose.Schema({
     type: "string",
     required: true,
   },
+  bio: {
+    type: "string",
+    default: "",
+  },
+  userMetadata: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UserMeta",
+  },
   date: {
     type: Date,
     default: Date.now,
