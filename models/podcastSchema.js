@@ -10,12 +10,10 @@ const podcastSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  author: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Users",
-    },
-  ],
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+  },
   avatar: {
     type: "string",
     required: true,
