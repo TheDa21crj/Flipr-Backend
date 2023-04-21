@@ -39,6 +39,18 @@ const podcastSchema = new mongoose.Schema({
     type: "Number",
     required: true,
   },
+  tags: [
+    {
+      type: "string",
+      required: true,
+    },
+  ],
+  category: [
+    {
+      type: "string",
+      required: true,
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,
