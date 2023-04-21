@@ -1,17 +1,23 @@
 const express = require("express");
-const router = express.Router();
-const loginController = require("../controllers/login/loginController");
 const auth = require("../middleWare/auth");
 const { check, validationResult } = require("express-validator");
+const podcastController = require("../controllers/podcast/podcastController");
+
+const router = express.Router();
 
 // auth
-router.use(auth);
+// router.use(auth);
 
 // Private || Create Podcast
-// router.post(
-//   "/",
-//   [check("email", "email is Required").not().isEmpty()],
-//   userController.getUser
-// );
+router.post(
+  "/create",
+  [check("title", "title is Required").not().isEmpty()],
+  [check("des", "des is Required").not().isEmpty()],
+  [check("thumbnail", "thumbnail is Required").not().isEmpty()],
+  [check("year", "year is Required").not().isEmpty()],
+  [check("tag", "tag is Required").not().isEmpty()],
+  [check("category", "category is Required").not().isEmpty()],
+  podcastController.createPodcast
+);
 
 module.exports = router;
