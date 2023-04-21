@@ -73,6 +73,7 @@ const register = async (req, res, next) => {
   }
 };
 
+// Public || Login User
 const login = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
