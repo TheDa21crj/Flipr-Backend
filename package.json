@@ -25,6 +25,7 @@
     "gravatar": "^1.8.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.4",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.1"
   },
   "devDependencies": {
