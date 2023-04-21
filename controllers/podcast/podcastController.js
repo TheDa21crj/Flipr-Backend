@@ -5,7 +5,7 @@ const { check, validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
 
 // Private || Create Podcast
-const login = async (req, res, next) => {};
+const createPodcast = async (req, res, next) => {};
 
 exports.login = login;
 exports.register = register;
