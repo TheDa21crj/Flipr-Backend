@@ -28,6 +28,7 @@ const podcastSchema = new mongoose.Schema({
     ref: "Episode",
   },
   season: {
+    type: "Number",
     required: true,
     default: 1,
   },
