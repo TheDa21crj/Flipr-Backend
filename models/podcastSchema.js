@@ -13,9 +13,14 @@ const podcastSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
+    required: true,
   },
-  avatar: {
-    type: "string",
+  rating: {
+    type: "Number",
+    default: 0,
+  },
+  type: {
+    type: String,
     required: true,
   },
   date: {
