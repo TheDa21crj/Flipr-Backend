@@ -39,9 +39,6 @@ const register = async (req, res, next) => {
       email: email,
       password: password,
       avatar: avatar,
-      // skills,
-      // Linkedin,
-      // College,
     });
 
     try {
