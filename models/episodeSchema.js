@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  runTime: {
+    type: String,
+    default: "00:00",
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,
