@@ -28,15 +28,15 @@ const userSchema = new mongoose.Schema({
     },
   ],
   password: {
-    type: "string",
+    type: String,
     required: true,
   },
   avatar: {
-    type: "string",
+    type: String,
     required: true,
   },
   bio: {
-    type: "string",
+    type: String,
     default: "",
   },
   userMetadata: {
