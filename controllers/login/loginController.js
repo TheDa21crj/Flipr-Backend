@@ -137,6 +137,22 @@ const subscribeID = async (req, res, next) => {
 
     if (userID) {
       console.log(userID);
+
+      if (userID.subscribe.length === 0) {
+        console.log("+Add ---- - ----");
+        userID.subscribe = id;
+        await userID.save();
+      } else {
+        console.log("Push ---- - ----");
+        let add = await user.findOneAndUpdate(
+          { _id: res.locals.userData.userEmail },
+          {
+            $push: {
+              subscribe: id,
+            },
+          }
+        );
+      }
     } else {
       return res.status(404).json("No User");
     }
