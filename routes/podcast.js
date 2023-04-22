@@ -59,4 +59,11 @@ router.post(
   podcastController.createPodcast
 );
 
+router.post(
+  "/season",
+  [check("id", "id is Required").not().isEmpty()],
+  [check("Change", "Change is Required").not().isEmpty()],
+  podcastController.seasonPodcast
+);
+
 module.exports = router;
