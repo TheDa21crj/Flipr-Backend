@@ -11,41 +11,41 @@ const createPodcast = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { title, des, thumbnail, year, tag, category } = req.body;
+  const { title, des, thumbnail, year, podcast, season } = req.body;
 
-  let userE;
-
-  console.table(res.locals.userData.userEmail);
-
+  let podcastID;
   try {
-    userE = await user.findOne({ email: res.locals.userData.userEmail });
+    podcastID = await podcast.findOne({ _id: podcast });
   } catch (err) {
     console.log(err);
     const error = new HttpError("Cannot add user", 400);
     return next(error);
   }
 
-  if (userE) {
-    const newPodcast = new podcast({
-      title,
-      des,
-      thumbnail,
-      year,
-      tag,
-      category,
-      author: userE._id,
-    });
-
-    try {
-      const createduser = await newPodcast.save();
-
-      return res.json({ state: "success" });
-    } catch (err) {
-      console.log(err);
-      const error = new HttpError("Cannot add user", 400);
-      return next(error);
-    }
+  if (podcastID) {
   }
+
+  //   if (userE) {
+  //     const newPodcast = new podcast({
+  //       title,
+  //       des,
+  //       thumbnail,
+  //       year,
+  //       tag,
+  //       category,
+  //       author: userE._id,
+  //     });
+
+  //     try {
+  //       const createduser = await newPodcast.save();
+
+  //       return res.json({ state: "success" });
+  //     } catch (err) {
+  //       console.log(err);
+  //       const error = new HttpError("Cannot add user", 400);
+  //       return next(error);
+  //     }
+  //   }
 };
 
 exports.createPodcast = createPodcast;
