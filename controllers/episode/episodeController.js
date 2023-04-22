@@ -23,12 +23,25 @@ const createPodcast = async (req, res, next) => {
   }
 
   if (podcastID) {
+    let videosPaths = [];
+
+    if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+      for (let video of req.files.videos) {
+        videosPaths.push("/" + video.path);
+      }
+    }
+
+    let link = {};
+    link.file = videosPaths;
+
     const newEpisode = new episode({
       title,
       des,
       thumbnail,
       podcast,
       season,
+      link,
+      type: "check",
     });
     try {
       const createduser = await newEpisode.save();
