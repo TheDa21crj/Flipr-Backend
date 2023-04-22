@@ -80,12 +80,12 @@ router.post(
       maxCount: 1,
     },
   ]),
-  uploads.fields([
-    {
-      name: "thumbnail",
-      maxCount: 1,
-    },
-  ]),
+  // uploads.fields([
+  //   {
+  //     name: "thumbnail",
+  //     maxCount: 1,
+  //   },
+  // ]),
   mediaController.createPodcast
 );
 
