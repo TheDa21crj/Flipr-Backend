@@ -145,7 +145,7 @@ const subscribeID = async (req, res, next) => {
       } else {
         console.log("Push ---- - ----");
         let add = await user.findOneAndUpdate(
-          { _id: res.locals.userData.userEmail },
+          { email: res.locals.userData.userEmail },
           {
             $push: {
               subscribe: id,
@@ -153,6 +153,8 @@ const subscribeID = async (req, res, next) => {
           }
         );
       }
+
+      return res.status(200).json({ state: "success" });
     } else {
       return res.status(404).json("No User");
     }
