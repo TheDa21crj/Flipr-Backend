@@ -5,6 +5,7 @@ const podcastController = require("../controllers/podcast/podcastController");
 
 const router = express.Router();
 
+// Public || Get Podcast by ID
 router.get(
   "/podcastbyID",
   [check("id", "id is Required").not().isEmpty()],
