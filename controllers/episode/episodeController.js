@@ -11,11 +11,11 @@ const createPodcast = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { title, des, thumbnail, year, podcast, season } = req.body;
+  const { title, des, thumbnail, podcastIDBody, season } = req.body;
 
   let podcastID;
   try {
-    podcastID = await podcast.findOne({ _id: podcast });
+    podcastID = await podcast.findOne({ _id: podcastIDBody });
   } catch (err) {
     console.log(err);
     const error = new HttpError("Cannot add user", 400);
