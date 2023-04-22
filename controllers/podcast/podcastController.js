@@ -5,11 +5,7 @@ const { check, validationResult } = require("express-validator");
 
 // Private || Create Podcast
 const createPodcast = async (req, res, next) => {
-  console.log(req.body)
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return res.status(400).json({ errors: errors.array() });
-  // }
+  console.log(req.body);
 
   const { title, des, tag, category } = req.body;
 
@@ -47,7 +43,7 @@ const createPodcast = async (req, res, next) => {
     });
 
     try {
-      const createduser = await newPodcast.save(); 
+      const createduser = await newPodcast.save();
 
       return res.json({ state: "success" });
     } catch (err) {
