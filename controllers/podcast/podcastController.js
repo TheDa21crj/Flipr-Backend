@@ -12,12 +12,29 @@ const createPodcast = async (req, res, next) => {
 
   const { title, des, thumbnail, year, tag, category } = req.body;
 
+  let userE;
+
+  console.table(res.locals.userData.userEmail);
+  console.log(title, des, thumbnail, year, tag, category);
+
   try {
-    console.log(title, des, thumbnail, year, tag, category);
+    userE = await user.findOne({ email: res.locals.userData.userEmail });
   } catch (err) {
     console.log(err);
     const error = new HttpError("Cannot add user", 400);
     return next(error);
+  }
+
+  if (userE) {
+    const newPodcast = new podcast({
+      title,
+      des,
+      thumbnail,
+      year,
+      tag,
+      category,
+      author: userE._id,
+    });
   }
 };
 
