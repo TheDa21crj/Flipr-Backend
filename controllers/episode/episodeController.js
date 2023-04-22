@@ -173,7 +173,7 @@ const editThumbnail = async (req, res) => {
   }
 };
 
-const epByID = async (req, res) => {
+const epByID = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -181,7 +181,14 @@ const epByID = async (req, res) => {
 
   const { id } = req.body;
 
+  console.log(id);
+
   try {
+    let episodeID = await episode.findOne({ _id: id });
+
+    if (episodeID) {
+      return res.status(202).json(episodeID);
+    }
   } catch (err) {
     const error = new HttpError("User not found", 500);
     return next(error);
