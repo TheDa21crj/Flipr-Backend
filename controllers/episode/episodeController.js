@@ -85,7 +85,7 @@ const { check, validationResult } = require("express-validator");
 
 // Backendurl/public/videos/file_name.mp4
 const createPodcast = async (req, res) => {
-  const { name } = req.body;
+  const { title, des, thumbnail, podcastIDBody, season } = req.body;
 
   console.log(req.body);
   let videosPaths = [];
@@ -98,7 +98,11 @@ const createPodcast = async (req, res) => {
 
   try {
     const createdMedia = await episode.create({
-      name,
+      title,
+      des,
+      thumbnail,
+      podcastIDBody,
+      season,
       videos: videosPaths,
     });
 
