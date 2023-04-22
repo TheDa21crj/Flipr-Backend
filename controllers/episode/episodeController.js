@@ -86,7 +86,7 @@ const { getVideoDurationInSeconds } = require("get-video-duration");
 
 // Backendurl/public/videos/file_name.mp4
 const createPodcast = async (req, res) => {
-  const { title, des, podcastIDBody, season } = req.body;
+  const { title, des, thumbnail, podcastIDBody, season } = req.body;
 
   console.log(req.body);
 
@@ -114,10 +114,18 @@ const createPodcast = async (req, res) => {
     const createdMedia = await episode.create({
       title,
       des,
+      thumbnail,
       podcastIDBody,
       season,
       videos: videosPaths,
     });
+
+    let episodeID = await episode.findOne({ videos: videosPaths });
+    let podcastID = await podcast.findOne({ _id: podcastIDBody });
+
+    console.log(episodeID._id);
+    console.log("podcastID.episodes");
+    console.log(podcastID.episodes);
 
     res.json({ message: "Media created successfully", createdMedia });
   } catch (error) {
