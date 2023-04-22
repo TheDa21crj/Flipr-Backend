@@ -1,14 +1,14 @@
 const express = require("express");
 const auth = require("../middleWare/auth");
 const { check, validationResult } = require("express-validator");
-const podcastController = require("../controllers/podcast/podcastController");
+const episodeController = require("../controllers/episode/episodeController");
 
 const router = express.Router();
 
 // auth
 router.use(auth);
 
-// Private || Create Podcast
+// Private || Create Episode
 router.post(
   "/create",
   [check("title", "title is Required").not().isEmpty()],
