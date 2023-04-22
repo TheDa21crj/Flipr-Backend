@@ -57,6 +57,7 @@ const podcastbyID = async (req, res, next) => {
   const { id } = req.body;
 
   try {
+    let podcast = await podcast.findOne({ _id: id });
   } catch (err) {
     console.log(err);
     const error = new HttpError("Cannot add user", 400);
