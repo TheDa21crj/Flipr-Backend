@@ -7,9 +7,11 @@ const { check, validationResult } = require("express-validator");
 const createPodcast = async (req, res, next) => {
   console.log(req.body);
 
-  const { title, des, tag, category } = req.body;
+  const { title, des, tags, category } = req.body;
 
-  console.table(tag);
+  console.table(typeof tags);
+
+  let tag = tags.split(",");
 
   let userE;
 
