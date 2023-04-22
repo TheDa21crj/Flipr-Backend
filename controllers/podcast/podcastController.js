@@ -123,13 +123,8 @@ const podcastTrending = async (req, res, next) => {
   const { type } = req.body;
 
   try {
-    let podcastID = await podcast.findOne({ _id: id });
-
-    if (podcastID) {
-      return res.status(202).json(podcastID);
-    } else {
-      return res.status(304).json("Does Not Exists");
-    }
+    let podcastID = await podcast.findOne({ type }).sort({ date: 1 }).limit(10);
+    return res.status(202).json(podcastID);
   } catch (err) {
     console.log(err);
     const error = new HttpError("Error", 400);
