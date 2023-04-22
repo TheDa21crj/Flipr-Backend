@@ -135,16 +135,21 @@ const editThumbnail = async (req, res) => {
 
   const { episodeID, thumbnail } = req.body;
 
-  let episodeData = episode.findOne({ _id: episodeID });
-  if (episodeData) {
-    episodeData.thumbnail = thumbnail;
+  try {
+    let episodeData = episode.findOne({ _id: episodeID });
+    if (episodeData) {
+      episodeData.thumbnail = thumbnail;
 
-    await episodeData.save();
-  } else {
-    return res.status(202).json({ state: false });
+      await episodeData.save();
+    } else {
+      return res.status(202).json({ state: false });
+    }
+    // if()
+    console.log("first=======");
+  } catch (err) {
+    const error = new HttpError("User not found", 500);
+    return next(error);
   }
-  // if()
-  console.log("first=======");
 };
 
 exports.createPodcast = createPodcast;
