@@ -44,6 +44,13 @@ router.get(
   podcastController.podcastbyID
 );
 
+// Public || Get Podcast by ID
+router.post(
+  "/podcastTrending",
+  [check("type", "type is Required").not().isEmpty()],
+  podcastController.podcastTrending
+);
+
 // auth
 router.use(auth);
 
