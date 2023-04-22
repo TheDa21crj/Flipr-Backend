@@ -10,11 +10,19 @@ const createPodcast = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { title, des, thumbnail, year, tag, category } = req.body;
+  const { title, des, year, tag, category } = req.body;
+
+  console.log(req.body);
 
   let userE;
 
   console.table(res.locals.userData.userEmail);
+
+  if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
+    for (let video of req.thumbnail.videos) {
+      videosPaths.push("/" + video.path);
+    }
+  }
 
   try {
     userE = await user.findOne({ email: res.locals.userData.userEmail });
@@ -28,7 +36,7 @@ const createPodcast = async (req, res, next) => {
     const newPodcast = new podcast({
       title,
       des,
-      thumbnail,
+      thumbnail: videosPaths,
       year,
       tag,
       category,
