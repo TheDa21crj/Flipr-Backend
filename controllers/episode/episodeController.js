@@ -85,7 +85,7 @@ const { check, validationResult } = require("express-validator");
 
 // Backendurl/public/videos/file_name.mp4
 const createPodcast = async (req, res) => {
-  const { title, des, thumbnail, podcastIDBody, season } = req.body;
+  const { title, des, podcastIDBody, season } = req.body;
 
   console.log(req.body.videos[1]);
   let videosPaths = [];
@@ -96,11 +96,19 @@ const createPodcast = async (req, res) => {
     }
   }
 
+  let thumbnailPaths = [];
+
+  if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
+    for (let video of req.files.thumbnail) {
+      thumbnailPaths.push("/" + video.path);
+    }
+  }
+
   try {
     const createdMedia = await episode.create({
       title,
       des,
-      thumbnail,
+      thumbnail: thumbnailPaths,
       podcastIDBody,
       season,
       videos: videosPaths,
