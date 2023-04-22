@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
       fs.mkdirSync("public/videos");
     }
 
-    // cb(null, "public/videos");
-    cb(null, path.resolve(__dirname, "public/videos"));
+    cb(null, "public/videos");
+    // cb(null, path.resolve(__dirname, "public/videos"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -32,7 +32,7 @@ const upload = multer({
 
     console.log(ext);
 
-    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mp3" && ext !== ".mov") {
+    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mov") {
       return cb(new Error("Only videos and audio are allowed!"));
     }
     cb(null, true);
