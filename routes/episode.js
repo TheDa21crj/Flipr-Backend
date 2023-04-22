@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const auth = require("./../middleWare/auth");
+const auth = require("./../middleWare/auth");
 const mediaController = require("./../controllers/episode/episodeController");
 const { check, validationResult } = require("express-validator");
 const multer = require("multer");
@@ -37,7 +37,7 @@ const upload = multer({
 });
 
 // auth
-// router.use(auth);
+router.use(auth);
 
 //get all media
 // router.get("/all", mediaController.getAll);
@@ -48,6 +48,10 @@ router.post(
   upload.fields([
     {
       name: "videos",
+      maxCount: 1,
+    },
+    {
+      name: "thumbnail",
       maxCount: 1,
     },
   ]),
