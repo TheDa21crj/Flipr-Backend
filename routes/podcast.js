@@ -5,6 +5,12 @@ const podcastController = require("../controllers/podcast/podcastController");
 
 const router = express.Router();
 
+router.post(
+  "/podcastbyID",
+  [check("id", "id is Required").not().isEmpty()],
+  podcastController.podcastbyID
+);
+
 // auth
 router.use(auth);
 
