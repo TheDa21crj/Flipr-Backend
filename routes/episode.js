@@ -14,10 +14,9 @@ router.post(
   [check("title", "title is Required").not().isEmpty()],
   [check("des", "des is Required").not().isEmpty()],
   [check("thumbnail", "thumbnail is Required").not().isEmpty()],
-  [check("year", "year is Required").not().isEmpty()],
-  [check("tag", "tag is Required").not().isEmpty()],
-  [check("category", "category is Required").not().isEmpty()],
-  podcastController.createPodcast
+  [check("podcast", "podcast is Required").not().isEmpty()],
+  [check("season", "season is Required").not().isEmpty()],
+  episodeController.createPodcast
 );
 
 module.exports = router;
