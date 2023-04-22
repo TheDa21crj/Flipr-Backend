@@ -23,6 +23,20 @@ const createPodcast = async (req, res, next) => {
   }
 
   if (podcastID) {
+    const newEpisode = new episode({
+      title,
+      des,
+      thumbnail,
+      podcast,
+      season,
+    });
+    try {
+      const createduser = await newEpisode.save();
+    } catch (err) {
+      console.log(err);
+      const error = new HttpError("Cannot add user", 400);
+      return next(error);
+    }
   }
 
   //   if (userE) {
