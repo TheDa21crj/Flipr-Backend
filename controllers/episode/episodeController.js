@@ -85,7 +85,6 @@ const { getVideoDurationInSeconds } = require("get-video-duration");
 // };
 
 // Backendurl/public/videos/file_name.mp4
-
 const createPodcast = async (req, res) => {
   const { title, des, podcastIDBody, season } = req.body;
 
