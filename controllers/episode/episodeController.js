@@ -128,6 +128,22 @@ const createPodcast = async (req, res) => {
 };
 
 const editThumbnail = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { episodeID, thumbnail } = req.body;
+
+  let episodeData = episode.findOne({ _id: episodeID });
+  if (episodeData) {
+    episodeData.thumbnail = thumbnail;
+
+    await episodeData.save();
+  } else {
+    return res.status(202).json({ state: false });
+  }
+  // if()
   console.log("first=======");
 };
 
