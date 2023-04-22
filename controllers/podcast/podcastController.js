@@ -15,7 +15,6 @@ const createPodcast = async (req, res, next) => {
   let userE;
 
   console.table(res.locals.userData.userEmail);
-  console.log(title, des, thumbnail, year, tag, category);
 
   try {
     userE = await user.findOne({ email: res.locals.userData.userEmail });
@@ -35,6 +34,16 @@ const createPodcast = async (req, res, next) => {
       category,
       author: userE._id,
     });
+
+    try {
+      const createduser = await newPodcast.save();
+
+      return res.json({ state: "success" });
+    } catch (err) {
+      console.log(err);
+      const error = new HttpError("Cannot add user", 400);
+      return next(error);
+    }
   }
 };
 
