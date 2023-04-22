@@ -33,10 +33,7 @@ const podcastSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  thumbnail: {
-    type: String,
-    required: true,
-  },
+  thumbnail: [{ type: String }],
   year: {
     type: "Number",
     required: true,

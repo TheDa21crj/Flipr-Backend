@@ -5,21 +5,24 @@ const { check, validationResult } = require("express-validator");
 
 // Private || Create Podcast
 const createPodcast = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+  console.log(req.body)
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() });
+  // }
 
   const { title, des, tag, category } = req.body;
 
-  console.log(req.body);
+  console.table(req.body);
 
   let userE;
 
   console.table(res.locals.userData.userEmail);
 
+  let videosPaths = [];
+
   if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
-    for (let video of req.thumbnail.videos) {
+    for (let video of req.files.thumbnail) {
       videosPaths.push("/" + video.path);
     }
   }
@@ -37,14 +40,14 @@ const createPodcast = async (req, res, next) => {
       title,
       des,
       thumbnail: videosPaths,
-      year: "2023",
+      year: new Date().getFullYear(),
       tag,
       category,
       author: userE._id,
     });
 
     try {
-      const createduser = await newPodcast.save();
+      const createduser = await newPodcast.save(); 
 
       return res.json({ state: "success" });
     } catch (err) {
