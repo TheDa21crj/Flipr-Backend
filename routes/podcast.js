@@ -51,6 +51,13 @@ router.post(
   podcastController.podcastTrending
 );
 
+// Public || All Podcast
+router.post(
+  "/podcastAll",
+  [check("type", "type is Required").not().isEmpty()],
+  podcastController.podcastAll
+);
+
 // auth
 router.use(auth);
 
