@@ -57,16 +57,16 @@ const podcastbyID = async (req, res, next) => {
   const { id } = req.body;
 
   try {
-    let podcast = await podcast.findOne({ _id: id });
+    let podcastID = await podcast.findOne({ _id: id });
 
-    if (podcast) {
-      return res.status(202).json(podcast);
+    if (podcastID) {
+      return res.status(202).json(podcastID);
     } else {
       return res.status(304).json("Does Not Exists");
     }
   } catch (err) {
     console.log(err);
-    const error = new HttpError("Cannot add user", 400);
+    const error = new HttpError("Error", 400);
     return next(error);
   }
 };
