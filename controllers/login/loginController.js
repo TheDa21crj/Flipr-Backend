@@ -123,5 +123,30 @@ const login = async (req, res, next) => {
   }
 };
 
+// Private || Add subscribe
+const subscribeID = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.body;
+
+  try {
+    const userID = await user.findOne({ email: res.locals.userData.userEmail });
+
+    if (userID) {
+      console.log(userID);
+    } else {
+      return res.status(404).json("No User");
+    }
+  } catch (err) {
+    const error = new HttpError("Error error generating token", 401);
+    console.log(err);
+    return next(error);
+  }
+};
+
 exports.login = login;
 exports.register = register;
+exports.subscribeID = subscribeID;
