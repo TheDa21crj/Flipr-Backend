@@ -45,7 +45,7 @@ router.post(
   [check("title", "title is Required").not().isEmpty()],
   [check("des", "des is Required").not().isEmpty()],
   [check("thumbnail", "thumbnail is Required").not().isEmpty()],
-  [check("podcast", "podcast is Required").not().isEmpty()],
+  [check("podcastIDBody", "podcast is Required").not().isEmpty()],
   [check("season", "season is Required").not().isEmpty()],
   upload.fields([
     {
