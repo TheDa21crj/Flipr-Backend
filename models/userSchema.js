@@ -39,6 +39,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  subscribe: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Podcast",
+    },
+  ],
   userMetadata: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserMeta",
