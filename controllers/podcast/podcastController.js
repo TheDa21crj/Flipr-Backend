@@ -9,11 +9,9 @@ const createPodcast = async (req, res, next) => {
 
   const { title, des, tag, category } = req.body;
 
-  console.table(req.body);
+  console.table(tag);
 
   let userE;
-
-  console.table(res.locals.userData.userEmail);
 
   let videosPaths = [];
 
