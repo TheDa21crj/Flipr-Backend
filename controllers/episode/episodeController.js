@@ -144,8 +144,6 @@ const editThumbnail = async (req, res) => {
     } else {
       return res.status(202).json({ state: false });
     }
-    // if()
-    console.log("first=======");
   } catch (err) {
     const error = new HttpError("User not found", 500);
     return next(error);
