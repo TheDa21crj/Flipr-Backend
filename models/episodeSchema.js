@@ -22,17 +22,10 @@ const episodeSchema = new mongoose.Schema({
     required: true,
     default: 1,
   },
-  link: [
-    {
-      file: { type: String, required: true },
-    },
-    {
-      timestamps: true,
-    },
-  ],
+  videos: [{ type: String }],
   type: {
     type: String,
-    required: true,
+    // required: true,
   },
   runTime: {
     type: String,
