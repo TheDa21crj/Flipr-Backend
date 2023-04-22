@@ -27,6 +27,10 @@ const episodeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
   runTime: {
     type: String,
     default: "00:00",
