@@ -30,7 +30,13 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     var ext = path.extname(file.originalname);
 
-    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mp3") {
+    if (
+      ext !== ".mkv" &&
+      ext !== ".mp4" &&
+      ext !== ".mp3" &&
+      ext != ".png" &&
+      ext != ".jpeg"
+    ) {
       return cb(new Error("Only videos and audio are allowed!"));
     }
     cb(null, true);
