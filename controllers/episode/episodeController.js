@@ -88,7 +88,7 @@ const { getVideoDurationInSeconds } = require("get-video-duration");
 const createPodcast = async (req, res) => {
   const { title, des, thumbnail, podcastIDBody, season } = req.body;
 
-  console.log(req.body);
+  console.table(req.body);
 
   let videosPaths = [];
 
@@ -125,7 +125,10 @@ const createPodcast = async (req, res) => {
 
     console.log(episodeID._id);
     console.log("podcastID.episodes");
-    console.log(podcastID.episodes);
+    podcastID.episodes = episodeID._id;
+    console.log(podcastID);
+
+    // await podcastID.save();
 
     res.json({ message: "Media created successfully", createdMedia });
   } catch (error) {
