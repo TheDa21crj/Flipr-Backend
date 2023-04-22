@@ -25,11 +25,11 @@ router.post(
 // auth
 router.use(auth);
 
-// Public || Get user Data
-// router.post(
-//   "/",
-//   [check("email", "email is Required").not().isEmpty()],
-//   userController.getUser
-// );
+// Public || Add subscribe
+router.post(
+  "/subscribe",
+  [check("id", "id is Required").not().isEmpty()],
+  loginController.subscribeID
+);
 
 module.exports = router;
