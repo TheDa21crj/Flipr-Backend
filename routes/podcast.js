@@ -44,7 +44,7 @@ router.get(
   podcastController.podcastbyID
 );
 
-// Public || Get Podcast by ID
+// Public || Trending
 router.post(
   "/podcastTrending",
   [check("type", "type is Required").not().isEmpty()],
