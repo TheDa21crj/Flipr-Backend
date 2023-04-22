@@ -22,10 +22,14 @@ const episodeSchema = new mongoose.Schema({
     required: true,
     default: 1,
   },
-  link: {
-    type: String,
-    required: true,
-  },
+  link: [
+    {
+      file: { type: String, required: true },
+    },
+    {
+      timestamps: true,
+    },
+  ],
   type: {
     type: String,
     required: true,
