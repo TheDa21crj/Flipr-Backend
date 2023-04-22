@@ -13,10 +13,7 @@ const episodeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Podcast",
   },
-  thumbnail: {
-    type: String,
-    required: true,
-  },
+  thumbnail: [{ type: String }],
   season: {
     type: "Number",
     required: true,
