@@ -37,7 +37,7 @@ const upload = multer({
 });
 
 // auth
-router.use(auth);
+// router.use(auth);
 
 // Private || Create Episode
 router.post(
