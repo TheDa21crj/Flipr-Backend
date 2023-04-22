@@ -66,7 +66,7 @@ const uploads = multer({
 });
 
 // auth
-router.use(auth);
+// router.use(auth);
 
 //get all media
 // router.get("/all", mediaController.getAll);
