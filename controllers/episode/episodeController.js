@@ -87,7 +87,6 @@ const { check, validationResult } = require("express-validator");
 const createPodcast = async (req, res) => {
   const { title, des, podcastIDBody, season } = req.body;
 
-  console.log(req.body.videos[1]);
   let videosPaths = [];
 
   if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
