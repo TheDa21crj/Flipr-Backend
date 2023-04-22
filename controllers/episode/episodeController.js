@@ -91,13 +91,13 @@ const createPodcast = async (req, res) => {
 
   console.log(req.body);
 
-  // let videosPaths = [];
+  let videosPaths = [];
 
-  // if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-  //   for (let video of req.files.videos) {
-  //     videosPaths.push("/" + video.path);
-  //   }
-  // }
+  if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+    for (let video of req.files.videos) {
+      videosPaths.push("/" + video.path);
+    }
+  }
 
   // let thumbnailPaths = [];
 
@@ -107,25 +107,25 @@ const createPodcast = async (req, res) => {
   //   }
   // }
 
-  // try {
-  //   getVideoDurationInSeconds(videosPaths).then((duration) => {
-  //     console.log(duration);
-  //   });
+  try {
+    // getVideoDurationInSeconds(videosPaths).then((duration) => {
+    //   console.log(duration);
+    // });
 
-  //   const createdMedia = await episode.create({
-  //     title,
-  //     des,
-  //     thumbnail: thumbnailPaths,
-  //     podcastIDBody,
-  //     season,
-  //     videos: videosPaths,
-  //   });
+    const createdMedia = await episode.create({
+      title,
+      des,
+      thumbnail: "thumbnailPaths",
+      podcastIDBody,
+      season,
+      videos: videosPaths,
+    });
 
-  //   res.json({ message: "Media created successfully", createdMedia });
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(400).json(error);
-  // }
+    res.json({ message: "Media created successfully", createdMedia });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
 };
 
 exports.createPodcast = createPodcast;
