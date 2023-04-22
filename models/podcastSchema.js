@@ -23,6 +23,7 @@ const podcastSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Episode",
+      default: "",
     },
   ],
   season: {
