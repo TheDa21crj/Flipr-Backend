@@ -125,10 +125,23 @@ const createPodcast = async (req, res) => {
 
     console.log(episodeID._id);
     console.log("podcastID.episodes");
-    podcastID.episodes = episodeID._id;
-    console.log(podcastID);
 
-    // await podcastID.save();
+    if (podcastID.episodes.length === 0) {
+      podcastID.episodes = episodeID._id;
+      await podcastID.save();
+    } else {
+      let add = await podcast.findOneAndUpdate(
+        { _id: podcastIDBody },
+        {
+          $push: {
+            episodes: episodeID._id,
+          },
+        }
+      );
+    }
+    console.log("podcastID.episodes.length");
+    console.log(podcastID.episodes.length);
+    console.log(podcastID);
 
     res.json({ message: "Media created successfully", createdMedia });
   } catch (error) {
