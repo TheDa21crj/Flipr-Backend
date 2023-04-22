@@ -66,8 +66,7 @@ router.post(
 // Private || Change Thumbnail
 router.post(
   "/editThumbnail",
-  [check("podcastID", "podcastID is Required").not().isEmpty()],
-  [check("eposodeID", "eposodeID is Required").not().isEmpty()],
+  [check("episodeID", "eposodeID is Required").not().isEmpty()],
   [check("thumbnail", "thumbnail is Required").not().isEmpty()],
   mediaController.editThumbnail
 );
