@@ -19,10 +19,12 @@ const podcastSchema = new mongoose.Schema({
     type: "Number",
     default: 0,
   },
-  episodes: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Episode",
-  },
+  episodes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Episode",
+    },
+  ],
   season: {
     type: "Number",
     required: true,
@@ -35,7 +37,7 @@ const podcastSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    required: true,
+    // required: true,
   },
   thumbnail: [{ type: String }],
   year: {
