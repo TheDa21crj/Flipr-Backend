@@ -65,7 +65,7 @@ const podcastbyID = async (req, res, next) => {
   const { id } = req.body;
 
   try {
-    let podcastID = await podcast.findOne({ _id: id });
+    let podcastID = await podcast.findOne({ _id: id }).populate("episodes");
 
     if (podcastID) {
       return res.status(202).json(podcastID);
