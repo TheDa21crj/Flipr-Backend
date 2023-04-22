@@ -10,7 +10,7 @@ const createPodcast = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { title, des, year, tag, category } = req.body;
+  const { title, des, tag, category } = req.body;
 
   console.log(req.body);
 
@@ -37,7 +37,7 @@ const createPodcast = async (req, res, next) => {
       title,
       des,
       thumbnail: videosPaths,
-      year,
+      year: "2023",
       tag,
       category,
       author: userE._id,
