@@ -91,7 +91,7 @@ const seasonPodcast = async (req, res, next) => {
     let podcastID = await podcast.findOne({ _id: id });
 
     if (podcastID) {
-      if (Change >= 1) {
+      if (Change === 1) {
         console.log("first===========");
         podcastID.season += 1;
       } else {
