@@ -48,7 +48,7 @@ router.post(
   upload.fields([
     {
       name: "videos",
-      maxCount: 5,
+      maxCount: 1,
     },
   ]),
   mediaController.createPodcast
