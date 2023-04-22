@@ -174,6 +174,19 @@ const editThumbnail = async (req, res) => {
 };
 
 const epByID = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.body;
+
+  try {
+  } catch (err) {
+    const error = new HttpError("User not found", 500);
+    return next(error);
+  }
+
   console.log("first");
 };
 
