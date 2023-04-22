@@ -32,12 +32,7 @@ const upload = multer({
 
     console.log(ext);
 
-    if (
-      ext !== ".mkv" &&
-      ext !== ".mp4" &&
-      ext !== ".mp3" &&
-      ext !== ".mov" &&
-    ) {
+    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mp3" && ext !== ".mov") {
       return cb(new Error("Only videos and audio are allowed!"));
     }
     cb(null, true);
@@ -69,8 +64,12 @@ router.post(
 );
 
 // Private || Change Thumbnail
-router.post("/editThumbnail",
-
-,mediaController.createPodcast);
+router.post(
+  "/editThumbnail",
+  [check("podcastID", "podcastID is Required").not().isEmpty()],
+  [check("eposodeID", "eposodeID is Required").not().isEmpty()],
+  [check("thumbnail", "thumbnail is Required").not().isEmpty()],
+  mediaController.editThumbnail
+);
 
 module.exports = router;
