@@ -88,41 +88,44 @@ const { getVideoDurationInSeconds } = require("get-video-duration");
 const createPodcast = async (req, res) => {
   const { title, des, podcastIDBody, season } = req.body;
 
-  let videosPaths = [];
+  console.log(req);
+  console.log(req.body);
 
-  if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-    for (let video of req.files.videos) {
-      videosPaths.push("/" + video.path);
-    }
-  }
+  // let videosPaths = [];
 
-  let thumbnailPaths = [];
+  // if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+  //   for (let video of req.files.videos) {
+  //     videosPaths.push("/" + video.path);
+  //   }
+  // }
 
-  if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
-    for (let video of req.files.thumbnail) {
-      thumbnailPaths.push("/" + video.path);
-    }
-  }
+  // let thumbnailPaths = [];
 
-  try {
-    getVideoDurationInSeconds(videosPaths).then((duration) => {
-      console.log(duration);
-    });
+  // if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
+  //   for (let video of req.files.thumbnail) {
+  //     thumbnailPaths.push("/" + video.path);
+  //   }
+  // }
 
-    const createdMedia = await episode.create({
-      title,
-      des,
-      thumbnail: thumbnailPaths,
-      podcastIDBody,
-      season,
-      videos: videosPaths,
-    });
+  // try {
+  //   getVideoDurationInSeconds(videosPaths).then((duration) => {
+  //     console.log(duration);
+  //   });
 
-    res.json({ message: "Media created successfully", createdMedia });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
-  }
+  //   const createdMedia = await episode.create({
+  //     title,
+  //     des,
+  //     thumbnail: thumbnailPaths,
+  //     podcastIDBody,
+  //     season,
+  //     videos: videosPaths,
+  //   });
+
+  //   res.json({ message: "Media created successfully", createdMedia });
+  // } catch (error) {
+  //   console.log(error);
+  //   res.status(400).json(error);
+  // }
 };
 
 exports.createPodcast = createPodcast;
