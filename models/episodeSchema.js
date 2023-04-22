@@ -23,7 +23,6 @@ const episodeSchema = new mongoose.Schema({
     default: 1,
   },
   videos: [{ type: String }],
-
   runTime: {
     type: String,
     default: "00:00",
