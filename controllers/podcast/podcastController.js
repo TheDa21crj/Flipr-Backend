@@ -47,4 +47,22 @@ const createPodcast = async (req, res, next) => {
   }
 };
 
+//Public || Podcast by Podcast ID
+const podcastbyID = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.body;
+
+  try {
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Cannot add user", 400);
+    return next(error);
+  }
+};
+
 exports.createPodcast = createPodcast;
+exports.podcastbyID = podcastbyID;
