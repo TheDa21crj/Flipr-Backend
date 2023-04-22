@@ -37,9 +37,6 @@ const upload = multer({
       ext !== ".mp4" &&
       ext !== ".mp3" &&
       ext !== ".mov" &&
-      ext !== ".jpeg" &&
-      ext !== ".jpg" &&
-      ext !== ".png"
     ) {
       return cb(new Error("Only videos and audio are allowed!"));
     }
@@ -70,5 +67,10 @@ router.post(
   // ]),
   mediaController.createPodcast
 );
+
+// Private || Change Thumbnail
+router.post("/editThumbnail",
+
+,mediaController.createPodcast);
 
 module.exports = router;
