@@ -13,7 +13,11 @@ const episodeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Podcast",
   },
-  thumbnail: [{ type: String }],
+  thumbnail: {
+    type: String,
+    default:
+      "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/podcast-youtube-thumbnail-design-template-3e13e5fd95f4f606afdb679cbc34bbcb_screen.jpg?ts=1600833688",
+  },
   season: {
     type: "Number",
     required: true,
