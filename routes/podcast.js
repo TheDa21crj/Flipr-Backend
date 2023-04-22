@@ -14,11 +14,11 @@ const storage = multer.diskStorage({
       fs.mkdirSync("public");
     }
 
-    if (!fs.existsSync("public/videos")) {
-      fs.mkdirSync("public/videos");
+    if (!fs.existsSync("public/podcast")) {
+      fs.mkdirSync("public/podcast");
     }
 
-    cb(null, "public/videos");
+    cb(null, "public/podcast");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -52,7 +52,12 @@ router.post(
   "/create",
   [check("title", "title is Required").not().isEmpty()],
   [check("des", "des is Required").not().isEmpty()],
-  [check("thumbnail", "thumbnail is Required").not().isEmpty()],
+  upload.fields([
+    {
+      name: "thumbnail",
+      maxCount: 1,
+    },
+  ]),
   [check("year", "year is Required").not().isEmpty()],
   [check("tag", "tag is Required").not().isEmpty()],
   [check("category", "category is Required").not().isEmpty()],
