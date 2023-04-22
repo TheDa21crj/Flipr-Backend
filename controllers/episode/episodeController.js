@@ -3,6 +3,7 @@ const HttpError = require("../../models/HttpError");
 const podcast = require("../../models/podcastSchema");
 const episode = require("../../models/episodeSchema");
 const { check, validationResult } = require("express-validator");
+const { getVideoDurationInSeconds } = require("get-video-duration");
 
 // // Private || Create Podcast
 // const createPodcast = async (req, res, next) => {
@@ -104,6 +105,10 @@ const createPodcast = async (req, res) => {
   }
 
   try {
+    getVideoDurationInSeconds(videosPaths).then((duration) => {
+      console.log(duration);
+    });
+
     const createdMedia = await episode.create({
       title,
       des,
