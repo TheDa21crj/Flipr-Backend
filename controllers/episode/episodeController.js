@@ -127,4 +127,9 @@ const createPodcast = async (req, res) => {
   }
 };
 
+const editThumbnail = async (req, res) => {
+  console.log("first=======");
+};
+
 exports.createPodcast = createPodcast;
+exports.editThumbnail = editThumbnail;
