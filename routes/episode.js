@@ -1,11 +1,11 @@
 const express = require("express");
-const auth = require("../middleWare/auth");
+const router = express.Router();
+// const auth = require("./../middleWare/auth");
+const mediaController = require("./../controllers/episode/episodeController");
 const { check, validationResult } = require("express-validator");
-const episodeController = require("../controllers/episode/episodeController");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -39,21 +39,19 @@ const upload = multer({
 // auth
 // router.use(auth);
 
-// Private || Create Episode
+//get all media
+// router.get("/all", mediaController.getAll);
+
+// Private || Post Create New
 router.post(
   "/create",
-  [check("title", "title is Required").not().isEmpty()],
-  [check("des", "des is Required").not().isEmpty()],
-  [check("thumbnail", "thumbnail is Required").not().isEmpty()],
-  [check("podcastIDBody", "podcast is Required").not().isEmpty()],
-  [check("season", "season is Required").not().isEmpty()],
   upload.fields([
     {
       name: "videos",
-      maxCount: 1,
+      maxCount: 5,
     },
   ]),
-  episodeController.createPodcast
+  mediaController.createPodcast
 );
 
 module.exports = router;
