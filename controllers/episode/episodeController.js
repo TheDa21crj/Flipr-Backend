@@ -13,6 +13,8 @@ const createPodcast = async (req, res, next) => {
 
   const { title, des, thumbnail, podcastIDBody, season } = req.body;
 
+  console.table(req.body);
+
   let podcastID;
   try {
     podcastID = await podcast.findOne({ _id: podcastIDBody });
