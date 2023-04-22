@@ -34,6 +34,7 @@ app.use(cookieParser());
 // routes
 app.use("/api/user", require("./routes/user"));
 app.use("/api/podcast", require("./routes/podcast"));
+app.use("/api/episode", require("./routes/episode"));
 app.use("/api/media", require("./routes/media"));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
