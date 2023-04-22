@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const multer = require("multer");
 
 const app = express();
 
@@ -26,12 +27,18 @@ app.use((req, res, next) => {
 connectDB();
 
 // init middleware
-app.use(express.json({ extended: false }));
+
+app.use(express.json({ extended: true }));
 
 // cookieParser
 app.use(cookieParser());
 
 // routes
+app.post('/test',(req,res)=>{
+  console.log("aaya")
+  console.log(req.body)
+  res.send("hello")
+})
 app.use("/api/user", require("./routes/user"));
 app.use("/api/podcast", require("./routes/podcast"));
 app.use("/api/episode", require("./routes/episode"));

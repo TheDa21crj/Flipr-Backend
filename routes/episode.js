@@ -17,7 +17,8 @@ const storage = multer.diskStorage({
       fs.mkdirSync("public/videos");
     }
 
-    cb(null, "public/videos");
+    // cb(null, "public/videos");
+    cb(null, path.resolve(__dirname, "public/videos"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -34,7 +35,8 @@ const storageImg = multer.diskStorage({
       fs.mkdirSync("public/episode");
     }
 
-    cb(null, "public/episode");
+    // cb(null, "public/episode");
+    cb(null, path.resolve(__dirname, "public/episode"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -80,12 +82,12 @@ router.post(
       maxCount: 1,
     },
   ]),
-  uploads.fields([
-    {
-      name: "thumbnail",
-      maxCount: 1,
-    },
-  ]),
+  // uploads.fields([
+  //   {
+  //     name: "thumbnail",
+  //     maxCount: 1,
+  //   },
+  // ]),
   mediaController.createPodcast
 );
 
