@@ -78,5 +78,42 @@ const podcastbyID = async (req, res, next) => {
   }
 };
 
+// Public || Season +-
+const seasonPodcast = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id, Change } = req.body;
+
+  try {
+    let podcastID = await podcast.findOne({ _id: id });
+
+    if (podcastID) {
+      console.log("first===========");
+      if (Change > 1) {
+        podcastID.season += 1;
+      } else {
+        if (podcastID.season > 1) {
+          podcastID.season -= 1;
+        }
+      }
+
+      console.log(podcastID.season);
+
+      await podcastID.save();
+      return res.status(202).json(podcastID);
+    } else {
+      return res.status(304).json("Does Not Exists");
+    }
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Error", 400);
+    return next(error);
+  }
+};
+
 exports.createPodcast = createPodcast;
 exports.podcastbyID = podcastbyID;
+exports.seasonPodcast = seasonPodcast;
