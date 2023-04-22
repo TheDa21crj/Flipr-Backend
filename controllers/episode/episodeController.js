@@ -115,7 +115,6 @@ const createPodcast = async (req, res) => {
     const createdMedia = await episode.create({
       title,
       des,
-      thumbnail: "thumbnailPaths",
       podcastIDBody,
       season,
       videos: videosPaths,
