@@ -173,5 +173,10 @@ const editThumbnail = async (req, res) => {
   }
 };
 
+const epByID = async (req, res) => {
+  console.log("first");
+};
+
 exports.createPodcast = createPodcast;
 exports.editThumbnail = editThumbnail;
+exports.epByID = epByID;
