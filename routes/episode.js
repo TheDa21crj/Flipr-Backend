@@ -39,6 +39,13 @@ const upload = multer({
   },
 });
 
+// Public || Get Episode By ID
+router.post(
+  "/getByID",
+  [check("id", "id is Required").not().isEmpty()],
+  mediaController.epByID
+);
+
 // auth
 router.use(auth);
 
