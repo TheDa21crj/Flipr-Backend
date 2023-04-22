@@ -30,7 +30,17 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     var ext = path.extname(file.originalname);
 
-    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mp3" && ext !== ".mov") {
+    console.log(ext);
+
+    if (
+      ext !== ".mkv" &&
+      ext !== ".mp4" &&
+      ext !== ".mp3" &&
+      ext !== ".mov" &&
+      ext !== ".jpeg" &&
+      ext !== ".jpg" &&
+      ext !== ".png"
+    ) {
       return cb(new Error("Only videos and audio are allowed!"));
     }
     cb(null, true);
@@ -51,12 +61,7 @@ router.post(
       name: "videos",
       maxCount: 1,
     },
-    {
-      name: "thumbnail",
-      maxCount: 1,
-    },
   ]),
-
   // uploads.fields([
   //   {
   //     name: "thumbnail",
