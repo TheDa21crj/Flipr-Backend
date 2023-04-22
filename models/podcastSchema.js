@@ -13,7 +13,7 @@ const podcastSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
-    // required: true,
+    required: true,
   },
   rating: {
     type: "Number",
