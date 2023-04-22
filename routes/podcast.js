@@ -6,7 +6,7 @@ const podcastController = require("../controllers/podcast/podcastController");
 const router = express.Router();
 
 // auth
-// router.use(auth);
+router.use(auth);
 
 // Private || Create Podcast
 router.post(
