@@ -35,6 +35,7 @@ const createPodcast = async (req, res, next) => {
     const newPodcast = new podcast({
       title,
       des,
+      type: "video",
       thumbnail: videosPaths,
       year: new Date().getFullYear(),
       tag,
@@ -121,6 +122,9 @@ const podcastTrending = async (req, res, next) => {
   }
 
   const { type } = req.body;
+
+  console.log("==============");
+  console.log(type);
 
   try {
     let podcastID = await podcast.findOne({ type }).sort({ date: 1 }).limit(10);
