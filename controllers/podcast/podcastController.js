@@ -93,7 +93,7 @@ const seasonPodcast = async (req, res, next) => {
     if (podcastID) {
       if (Change === 1) {
         podcastID.season += 1;
-      } else {
+      } else if (Change === 0) {
         if (podcastID.season > 1) {
           podcastID.season -= 1;
         }
