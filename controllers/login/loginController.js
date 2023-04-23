@@ -231,7 +231,9 @@ const subscribeID = async (req, res, next) => {
 };
 
 // Private || Remove subscribe
-const unSubscribe = async (req, res, next) => {};
+const unSubscribe = async (req, res, next) => {
+  console.log(first);
+};
 
 // Private || Rating
 const Rating = async (req, res, next) => {
