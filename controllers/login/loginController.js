@@ -146,6 +146,7 @@ const subscribeID = async (req, res, next) => {
       podcastdataSend.podcastID = id;
       podcastdataSend.subscribed = true;
 
+      console.log(podcastdataSend);
       console.table(podcastdataSend);
 
       //   // userID.subscribe = id;
@@ -154,7 +155,7 @@ const subscribeID = async (req, res, next) => {
         { email: res.locals.userData.userEmail },
         {
           $push: {
-            subscribe: id,
+            podcast: id,
           },
         }
       );
