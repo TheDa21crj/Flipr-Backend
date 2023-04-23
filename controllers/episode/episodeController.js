@@ -12,6 +12,7 @@ const createPodcast = async (req, res) => {
 
   console.table(req.body);
 
+  // create
   if (flag) {
     let videosPaths = [];
 
@@ -81,6 +82,14 @@ const createPodcast = async (req, res) => {
       res.status(400).json(error);
     }
   } else {
+    // edit
+    let editEpisode = {};
+    editEpisode.title = title;
+    editEpisode.des = des;
+    editEpisode.thumbnail = thumbnail;
+    editEpisode.season = season;
+
+    console.log(editEpisode);
   }
 };
 
