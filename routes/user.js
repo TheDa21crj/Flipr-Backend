@@ -33,7 +33,11 @@ router.post(
 );
 
 // Private || Add Rating
-router.get("/createdPodcast", loginController.createdPodcast);
+router.get(
+  "/unSubscribe",
+  [check("id", "id is Required").not().isEmpty()],
+  loginController.unSubscribe
+);
 
 // Private || Add Rating
 router.post(
