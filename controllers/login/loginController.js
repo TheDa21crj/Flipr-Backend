@@ -232,6 +232,26 @@ const subscribeID = async (req, res, next) => {
 
 // Private || Remove subscribe
 const unSubscribe = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.body;
+
+  try {
+    const userID = await user.findOne({ email: res.locals.userData.userEmail });
+
+    if (userID) {
+    } else {
+      return res.status(404).json("No User");
+    }
+  } catch (err) {
+    const error = new HttpError("Error error generating token", 401);
+    console.log(err);
+    return next(error);
+  }
+
   console.log(first);
 };
 
