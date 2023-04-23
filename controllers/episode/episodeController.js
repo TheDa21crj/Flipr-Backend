@@ -1,3 +1,4 @@
+const ffmpeg = require("fluent-ffmpeg");
 const user = require("../../models/userSchema");
 const HttpError = require("../../models/HttpError");
 const podcast = require("../../models/podcastSchema");
@@ -107,14 +108,6 @@ const createPodcast = async (req, res) => {
   // }
 
   try {
-    // `${BACKEND_URI}/api/media/all`
-    console.log(videosPaths[0]);
-    getVideoDurationInSeconds(`http://localhost:5000${videosPaths}`).then(
-      (duration) => {
-        console.log(duration);
-      }
-    );
-
     const createdMedia = await episode.create({
       title,
       des,
@@ -145,6 +138,20 @@ const createPodcast = async (req, res) => {
         }
       );
     }
+
+    // `${BACKEND_URI}/api/media/all`
+    // console.log(`http://localhost:5000${videosPaths[0]}`);
+
+    // const videoPath = "path/to/video.mp4";
+    // ffmpeg.ffprobe(videoPath, (err, metadata) => {
+    //   if (err) {
+    //     console.error(err);
+    //     res.sendStatus(500);
+    //     return;
+    //   }
+    //   const duration = metadata.format.duration;
+    //   console.log(duration);
+    // });
 
     res.json({ message: "Media created successfully", createdMedia });
   } catch (error) {
