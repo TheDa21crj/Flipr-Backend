@@ -230,6 +230,9 @@ const subscribeID = async (req, res, next) => {
   }
 };
 
+// Private || Remove subscribe
+const unSubscribe = async (req, res, next) => {};
+
 // Private || Rating
 const Rating = async (req, res, next) => {
   const errors = validationResult(req);
@@ -280,6 +283,7 @@ const Rating = async (req, res, next) => {
   }
 };
 
+//
 const createdPodcast = async (req, res, next) => {
   try {
     const userID = await user
@@ -297,5 +301,6 @@ const createdPodcast = async (req, res, next) => {
 exports.login = login;
 exports.Rating = Rating;
 exports.register = register;
+exports.unSubscribe = unSubscribe;
 exports.subscribeID = subscribeID;
 exports.createdPodcast = createdPodcast;
