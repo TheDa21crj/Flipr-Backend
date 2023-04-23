@@ -46,6 +46,15 @@ const createPodcast = async (req, res, next) => {
     try {
       const createduser = await newPodcast.save();
 
+      let newPodcastCreated = await podcast.find({ thumbnail: videosPaths });
+
+      console.log("newPodcastCreated==========");
+      console.log(newPodcastCreated);
+
+      userE.createdPodcast = newPodcast._id;
+
+      await userE.save();
+
       return res.json({ state: "success" });
     } catch (err) {
       console.log(err);
