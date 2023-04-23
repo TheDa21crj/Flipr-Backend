@@ -314,11 +314,6 @@ const Rating = async (req, res, next) => {
       });
 
       var totalrating = podcastIDData.totalrating;
-      // podcastIDData.noofrating = podcastIDData.noofrating + 1;
-
-      // podcastIDData.rating =
-      //   (podcastIDData.rating * totalrating + rating) /
-      //   podcastIDData.noofrating;
 
       let newR =
         (podcastIDData.rating * podcastIDData.totalrating + rating) /
