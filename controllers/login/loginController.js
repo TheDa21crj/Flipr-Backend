@@ -349,9 +349,27 @@ const createdPodcast = async (req, res, next) => {
   }
 };
 
+// Private || Update User
+const UpdateUser = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { name, bio } = req.body;
+
+  try {
+  } catch (err) {
+    const error = new HttpError("Error error generating token", 401);
+    console.log(err);
+    return next(error);
+  }
+};
+
 exports.login = login;
 exports.Rating = Rating;
 exports.register = register;
+exports.UpdateUser = UpdateUser;
 exports.unSubscribe = unSubscribe;
 exports.subscribeID = subscribeID;
 exports.createdPodcast = createdPodcast;
