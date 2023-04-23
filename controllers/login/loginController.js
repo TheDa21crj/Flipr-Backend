@@ -141,7 +141,7 @@ const subscribeID = async (req, res, next) => {
         console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
 
         let padcatSuvAlready = await user.findOne({
-          "podcast.podcastID": id,
+          "podcast.$.podcastID": id,
         });
 
         if (padcatSuvAlready) {
@@ -243,6 +243,35 @@ const unSubscribe = async (req, res, next) => {
     const userID = await user.findOne({ email: res.locals.userData.userEmail });
 
     if (userID) {
+      let padcatSuvAlready = await user.findOne({
+        "podcast.podcastID": id,
+      });
+
+      if (padcatSuvAlready) {
+        let userCheck = await user.updateOne(
+          { email: res.locals.userData.userEmail },
+          { $pull: { "podcast.$.podcastID": id } }
+        );
+        return res.status(400).json({ exists: true, userCheck });
+      }
+
+      console.log(padcatSuvAlready);
+      // let padcastFind = await podcast.findOne({
+      //   _id: id,
+      // });
+
+      // let addP;
+      // if (padcastFind) {
+      //   addP = await podcast.findOneAndUpdate(
+      //     { _id: id },
+      //     {
+      //       $set: {
+      //         subscribe: padcastFind.subscribe - 1,
+      //       },
+      //     }
+      //   );
+      // }
+      return res.status(400).json({ exists: false });
     } else {
       return res.status(404).json("No User");
     }
