@@ -1,5 +1,6 @@
 const HttpError = require("../../models/HttpError");
 const user = require("../../models/userSchema");
+const podcast = require("../../models/podcastSchema");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
@@ -163,7 +164,24 @@ const subscribeID = async (req, res, next) => {
               },
             }
           );
-          return res.status(200).json({ state: "success" });
+
+          let padcastFind = await podcast.findOne({
+            _id: id,
+          });
+
+          let addP;
+          if (padcastFind) {
+            addP = await podcast.findOneAndUpdate(
+              { _id: id },
+              {
+                $set: {
+                  subscribe: padcastFind.subscribe + 1,
+                },
+              }
+            );
+          }
+
+          return res.status(200).json({ state: "success", addP });
         }
       } else {
         console.log("+Add ---- - ----");
@@ -184,7 +202,23 @@ const subscribeID = async (req, res, next) => {
           }
         );
 
-        return res.status(200).json({ state: "success" });
+        let padcastFind = await podcast.findOne({
+          _id: id,
+        });
+
+        let addP;
+        if (padcastFind) {
+          addP = await podcast.findOneAndUpdate(
+            { _id: id },
+            {
+              $set: {
+                subscribe: padcastFind.subscribe + 1,
+              },
+            }
+          );
+        }
+
+        return res.status(200).json({ state: "success", addP });
       }
     } else {
       return res.status(404).json("No User");
