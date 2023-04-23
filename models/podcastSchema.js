@@ -22,7 +22,7 @@ const podcastSchema = new mongoose.Schema({
   totalrating: {
     type: "Number",
     required: true,
-    default: 10,
+    default: 0,
   },
   episodes: [
     {
