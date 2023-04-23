@@ -205,10 +205,28 @@ const Rating = async (req, res, next) => {
   const { id, rating } = req.body;
 
   try {
-    const userID = await user.findOne({ email: res.locals.userData.userEmail });
+    const userID = await user.findOne({
+      email: res.locals.userData.userEmail,
+      "podcast.podcastID": id,
+    });
+
+    console.log(userID);
 
     if (userID) {
-      return res.status(202).json("Sub");
+      userID.podcast.rating = rating;
+
+      await userID.save();
+
+      // let add = await user.findOneAndUpdate(
+      //   { email: res.locals.userData.userEmail, "podcast.podcastID": id },
+      //   {
+      //     $push: {
+      //       "podcast.rating": rating,
+      //     },
+      //   }
+      // );
+
+      return res.status(304).json("User Rating Added");
     } else {
       return res.status(304).json("No user found");
     }
