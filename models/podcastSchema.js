@@ -20,7 +20,7 @@ const podcastSchema = new mongoose.Schema({
     default: 0,
   },
   totalrating: {
-    type: "Number",
+    type: Number,
     required: true,
     default: 0,
   },
