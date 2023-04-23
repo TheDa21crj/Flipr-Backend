@@ -58,6 +58,9 @@ router.post(
   podcastController.podcastAll
 );
 
+// Public || All Podcast || wt Type
+router.get("/podcastAllType", podcastController.podcastAllType);
+
 // auth
 router.use(auth);
 
