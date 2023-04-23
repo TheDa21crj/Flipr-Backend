@@ -32,7 +32,7 @@ router.post(
   loginController.subscribeID
 );
 
-// Public || Add Rating
+// Private || Add Rating
 router.post(
   "/Rating",
   [check("id", "id is Required").not().isEmpty()],
