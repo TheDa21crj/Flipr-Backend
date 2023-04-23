@@ -242,39 +242,38 @@ const unSubscribe = async (req, res, next) => {
   try {
     const userID = await user.findOne({ email: res.locals.userData.userEmail });
 
+    console.log(userID);
     if (userID) {
-      let padcatSuvAlready = await user.findOne({
-        "podcast.$.podcastID": id,
+      let add = await user.findOneAndUpdate(
+        { email: res.locals.userData.userEmail, "podcast.podcastID": id },
+        {
+          $set: {
+            "podcast.$.subscribed": false,
+          },
+        }
+      );
+      let padcastFind = await podcast.findOne({
+        _id: id,
       });
 
-      if (padcatSuvAlready) {
-        let userCheck = await user.updateOne(
-          { email: res.locals.userData.userEmail },
-          { $pull: { "podcast.$.podcastID": id } }
+      let addP;
+      if (padcastFind) {
+        addP = await podcast.findOneAndUpdate(
+          { _id: id },
+          {
+            $set: {
+              subscribe: padcastFind.subscribe - 1,
+            },
+          }
         );
-        return res.status(400).json({ exists: true, userCheck });
       }
 
-      console.log(padcatSuvAlready);
-      // let padcastFind = await podcast.findOne({
-      //   _id: id,
-      // });
+      console.log("padcastFind ---------- ---------- -----------");
+      console.log(padcastFind);
 
-      // let addP;
-      // if (padcastFind) {
-      //   addP = await podcast.findOneAndUpdate(
-      //     { _id: id },
-      //     {
-      //       $set: {
-      //         subscribe: padcastFind.subscribe - 1,
-      //       },
-      //     }
-      //   );
-      // }
-      return res.status(400).json({ exists: false });
-    } else {
-      return res.status(404).json("No User");
+      return res.status(202).json({ exists: true, userID });
     }
+    return res.status(400).json({ exists: false });
   } catch (err) {
     const error = new HttpError("Error error generating token", 401);
     console.log(err);
