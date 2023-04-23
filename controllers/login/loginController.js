@@ -282,10 +282,10 @@ const Rating = async (req, res, next) => {
 const createdPodcast = async (req, res, next) => {
   try {
     const userID = await user
-      .find({ email: res.locals.userData.userEmail })
+      .findOne({ email: res.locals.userData.userEmail })
       .populate("createdPodcast");
 
-    res.status(202).json(userID);
+    res.status(202).json(userID.createdPodcast);
   } catch (err) {
     const error = new HttpError("Error error generating token", 401);
     console.log(err);
