@@ -218,11 +218,13 @@ const Rating = async (req, res, next) => {
 
       console.log(userID.podcast);
 
-      // let newData = userID.podcast.filter((e) => {
-      //   console.log(e.podcastID, `new ObjectId("${id}")`);
-      //   e.podcastID == `new ObjectId("${id}")`;
-      // });
+      let newData = userID.podcast.filter((e) => {
+        if (e.podcastID.toString() === id) {
+          return e;
+        }
+      });
 
+      console.log(newData.rating);
       // await userID.save();
 
       // let add = await user.findOneAndUpdate(
