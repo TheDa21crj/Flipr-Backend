@@ -13,7 +13,7 @@ const createPodcast = async (req, res) => {
   console.table(req.body);
 
   // create
-  if (flag) {
+  if (flag === true) {
     let videosPaths = [];
 
     if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
@@ -83,13 +83,30 @@ const createPodcast = async (req, res) => {
     }
   } else {
     // edit
-    let editEpisode = {};
-    editEpisode.title = title;
-    editEpisode.des = des;
-    editEpisode.thumbnail = thumbnail;
-    editEpisode.season = season;
+    // let episodeData = episode.findOne({ _id: req.body.id });
+    let episodeData = await episode.findOne({
+      _id: "64457028e4b8ad14939ea4c9",
+    });
+    if (episodeData) {
+      let videosPaths = [];
 
-    console.log(editEpisode);
+      if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+        for (let video of req.files.videos) {
+          videosPaths.push("/" + video.path);
+        }
+      }
+
+      episodeData.title = title;
+      episodeData.des = des;
+      episodeData.thumbnail = thumbnail;
+      episodeData.season = season;
+      episodeData.videos = videosPaths;
+
+      console.log(episodeData);
+      await episodeData.save();
+
+      return res.status(202).json({ edit: true });
+    }
   }
 };
 
