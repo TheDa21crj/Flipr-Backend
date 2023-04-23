@@ -107,9 +107,13 @@ const createPodcast = async (req, res) => {
   // }
 
   try {
-    // getVideoDurationInSeconds(videosPaths).then((duration) => {
-    //   console.log(duration);
-    // });
+    // `${BACKEND_URI}/api/media/all`
+    console.log(videosPaths[0]);
+    getVideoDurationInSeconds(`http://localhost:5000${videosPaths}`).then(
+      (duration) => {
+        console.log(duration);
+      }
+    );
 
     const createdMedia = await episode.create({
       title,
