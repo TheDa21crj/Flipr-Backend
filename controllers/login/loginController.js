@@ -213,30 +213,16 @@ const Rating = async (req, res, next) => {
     console.log(userID);
 
     if (userID) {
-      console.log("userID.podcast.rating = rating");
-      // userID.podcast.rating = rating;
-
-      console.log(userID.podcast);
-
-      let newData = userID.podcast.filter((e) => {
-        if (e.podcastID.toString() === id) {
-          return e;
+      let add = await user.findOneAndUpdate(
+        { email: res.locals.userData.userEmail, "podcast.podcastID": id },
+        {
+          $set: {
+            "podcast.$.rating": rating,
+          },
         }
-      });
+      );
 
-      console.log(newData.rating);
-      // await userID.save();
-
-      // let add = await user.findOneAndUpdate(
-      //   { email: res.locals.userData.userEmail, "podcast.podcastID": id },
-      //   {
-      //     $push: {
-      //       "podcast.rating": rating,
-      //     },
-      //   }
-      // );
-
-      return res.status(202).json({ msg: "User Rating Added", newData });
+      return res.status(202).json({ msg: "User Rating Added", add });
     } else {
       return res.status(304).json("No user found");
     }
