@@ -158,8 +158,31 @@ const podcastAll = async (req, res, next) => {
   }
 };
 
+// Public || Podcast by Trending
+const podcastAllType = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { type } = req.body;
+
+  console.log("==============");
+  console.log(type);
+
+  try {
+    let podcastID = await podcast.find();
+    return res.status(202).json(podcastID);
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Error", 400);
+    return next(error);
+  }
+};
+
 exports.podcastAll = podcastAll;
 exports.podcastbyID = podcastbyID;
-exports.createPodcast = createPodcast;
 exports.seasonPodcast = seasonPodcast;
+exports.createPodcast = createPodcast;
+exports.podcastAllType = podcastAllType;
 exports.podcastTrending = podcastTrending;
