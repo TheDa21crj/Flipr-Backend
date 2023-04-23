@@ -12,8 +12,7 @@ const userSchema = new mongoose.Schema({
   },
   podcast: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Podcast",
+      podcastID: { type: mongoose.Schema.Types.ObjectId, ref: "Podcast" },
       subscribed: {
         type: "Boolean",
         default: false,
@@ -39,12 +38,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  subscribe: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Podcast",
-    },
-  ],
   userMetadata: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserMeta",
