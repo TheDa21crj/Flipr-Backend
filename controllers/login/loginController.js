@@ -222,6 +222,12 @@ const Rating = async (req, res, next) => {
         }
       );
 
+      const podcastIDData = await podcast.findOne({
+        _id: id,
+      });
+
+      console.log(podcastIDData);
+
       return res.status(202).json({ msg: "User Rating Added", add });
     } else {
       return res.status(304).json("No user found");
