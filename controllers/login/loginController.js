@@ -170,6 +170,22 @@ const Rating = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+
+  const { id, rating } = req.body;
+
+  try {
+    const userID = await user.findOne({ email: res.locals.userData.userEmail });
+
+    if (userID) {
+      return res.status(202).json("Sub");
+    } else {
+      return res.status(304).json("No user found");
+    }
+  } catch (err) {
+    const error = new HttpError("Error error generating token", 401);
+    console.log(err);
+    return next(error);
+  }
 };
 
 exports.login = login;
