@@ -115,7 +115,7 @@ const createPodcast = async (req, res) => {
       title,
       des,
       thumbnail,
-      podcastIDBody,
+      podcast: podcastIDBody,
       season,
       videos: videosPaths,
     });
@@ -173,6 +173,7 @@ const editThumbnail = async (req, res) => {
   }
 };
 
+// Public || Episode By ID
 const epByID = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -184,7 +185,11 @@ const epByID = async (req, res, next) => {
   console.log(id);
 
   try {
-    let episodeID = await episode.findOne({ _id: id });
+    let episodeID = await episode
+      .findOne({ _id: id })
+      .populate({ path: "podcast", populate: { path: "author" } });
+
+    // "podcast", "_id author type"
 
     console.log("episodeID");
     if (episodeID) {
