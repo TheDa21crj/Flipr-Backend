@@ -139,24 +139,36 @@ const subscribeID = async (req, res, next) => {
       console.log(userID);
       console.table(userID.podcast);
 
-      if (userID.podcast.length === 0) {
-        console.log("+Add ---- - ----");
+      // if (userID.podcast.length === 0) {
+      console.log("+Add ---- - ----");
 
-        //   // console.log(userID);
+      let podcastdataSend = {};
+      podcastdataSend.podcastID = id;
+      podcastdataSend.subscribed = true;
 
-        //   // userID.subscribe = id;
-        //   await userID.save();
-      } else {
-        console.log("Push ---- - ----");
-        //   // let add = await user.findOneAndUpdate(
-        //   //   { email: res.s.userData.userEmail },
-        //   //   {
-        //   //     $push: {
-        //   //       subscribe: id,
-        //   //     },
-        //   //   }
-        //   // );
-      }
+      console.table(podcastdataSend);
+
+      //   // userID.subscribe = id;
+      //   await userID.save();
+      let add = await user.findOneAndUpdate(
+        { email: res.locals.userData.userEmail },
+        {
+          $push: {
+            subscribe: id,
+          },
+        }
+      );
+      // } else {
+      console.log("Push ---- - ----");
+      //   // let add = await user.findOneAndUpdate(
+      //   //   { email: res.s.userData.userEmail },
+      //   //   {
+      //   //     $push: {
+      //   //       subscribe: id,
+      //   //     },
+      //   //   }
+      //   // );
+      // }
 
       return res.status(200).json({ state: "success" });
     } else {
