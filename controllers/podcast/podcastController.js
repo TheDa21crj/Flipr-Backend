@@ -199,7 +199,7 @@ const podcastAllType = async (req, res, next) => {
 
 exports.podcastAll = podcastAll;
 exports.podcastbyID = podcastbyID;
-exports.seasonPodcast = seasonPodcast;
 exports.createPodcast = createPodcast;
+exports.seasonPodcast = seasonPodcast;
 exports.podcastAllType = podcastAllType;
 exports.podcastTrending = podcastTrending;
