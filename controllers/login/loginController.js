@@ -324,6 +324,19 @@ const Rating = async (req, res, next) => {
         (podcastIDData.rating * totalrating + rating) /
         podcastIDData.noofrating;
       console.log(newR);
+      console.log(
+        "podcastIDData.rating",
+        podcastIDData.rating,
+        typeof podcastIDData.rating
+      );
+
+      console.log("totalrating", totalrating, typeof totalrating);
+      console.log("rating", rating, typeof rating);
+      console.log(
+        "podcastIDData.noofrating",
+        podcastIDData.noofrating,
+        typeof podcastIDData.noofrating
+      );
 
       return res.status(202).json({ msg: "User Rating Added", podcastIDData });
     } else {
