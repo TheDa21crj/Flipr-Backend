@@ -32,4 +32,12 @@ router.post(
   loginController.subscribeID
 );
 
+// Public || Add Rating
+router.post(
+  "/Rating",
+  [check("id", "id is Required").not().isEmpty()],
+  [check("rating", "rating is Required").not().isEmpty()],
+  loginController.Rating
+);
+
 module.exports = router;
