@@ -34,11 +34,11 @@ app.use(express.json({ extended: true }));
 app.use(cookieParser());
 
 // routes
-app.post('/test',(req,res)=>{
-  console.log("aaya")
-  console.log(req.body)
-  res.send("hello")
-})
+app.post("/test", (req, res) => {
+  console.log("aaya");
+  console.log(req.body);
+  res.send("hello");
+});
 app.use("/api/user", require("./routes/user"));
 app.use("/api/podcast", require("./routes/podcast"));
 app.use("/api/episode", require("./routes/episode"));
