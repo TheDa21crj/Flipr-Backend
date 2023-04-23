@@ -359,6 +359,11 @@ const UpdateUser = async (req, res, next) => {
   const { name, bio } = req.body;
 
   try {
+    const userID = await user.findOne({
+      email: res.locals.userData.userEmail,
+    });
+
+    return res.status(202).json({ state: "User", userID });
   } catch (err) {
     const error = new HttpError("Error error generating token", 401);
     console.log(err);
