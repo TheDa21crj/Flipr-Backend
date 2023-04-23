@@ -38,7 +38,7 @@ const upload = multer({
 });
 
 // Public || Get Podcast by ID
-router.get(
+router.post(
   "/podcastbyID",
   [check("id", "id is Required").not().isEmpty()],
   podcastController.podcastbyID
