@@ -10,7 +10,6 @@ const createPodcast = async (req, res, next) => {
   const { title, des, tags, category } = req.body;
 
   console.table(typeof tags);
-
   let tag = tags.split(",");
 
   let userE;
