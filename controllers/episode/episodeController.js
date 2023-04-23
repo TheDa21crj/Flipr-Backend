@@ -185,9 +185,10 @@ const epByID = async (req, res, next) => {
   console.log(id);
 
   try {
-    let episodeID = await episode
-      .findOne({ _id: id })
-      .populate({ path: "podcast", populate: { path: "author" } });
+    let episodeID = await episode.findOne({ _id: id }).populate({
+      path: "podcast",
+      populate: { path: "author", select: "_id name avatar bio" },
+    });
 
     // "podcast", "_id author type"
 
