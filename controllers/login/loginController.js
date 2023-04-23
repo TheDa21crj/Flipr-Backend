@@ -363,6 +363,13 @@ const UpdateUser = async (req, res, next) => {
       email: res.locals.userData.userEmail,
     });
 
+    if (userID) {
+      userID.name = name;
+      userID.bio = bio;
+
+      await userID.save();
+    }
+
     return res.status(202).json({ state: "User", userID });
   } catch (err) {
     const error = new HttpError("Error error generating token", 401);
