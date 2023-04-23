@@ -380,8 +380,27 @@ const UpdateUser = async (req, res, next) => {
   }
 };
 
+const subData = async (req, res, next) => {
+  try {
+    const userID = await user.findOne({
+      email: res.locals.userData.userEmail,
+    });
+
+    let reqData = userID.podcast.filter((e) => {});
+
+    console.log(userID.podcast);
+
+    return res.status(202).json({ state: "User", userID });
+  } catch (err) {
+    const error = new HttpError("Error error generating token", 401);
+    console.log(err);
+    return next(error);
+  }
+};
+
 exports.login = login;
 exports.Rating = Rating;
+exports.subData = subData;
 exports.register = register;
 exports.UpdateUser = UpdateUser;
 exports.unSubscribe = unSubscribe;
