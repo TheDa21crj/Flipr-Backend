@@ -314,29 +314,17 @@ const Rating = async (req, res, next) => {
       });
 
       var totalrating = podcastIDData.totalrating;
-      podcastIDData.noofrating = podcastIDData.noofrating + 1;
+      // podcastIDData.noofrating = podcastIDData.noofrating + 1;
 
-      podcastIDData.rating =
-        (podcastIDData.rating * totalrating + rating) /
-        podcastIDData.noofrating;
+      // podcastIDData.rating =
+      //   (podcastIDData.rating * totalrating + rating) /
+      //   podcastIDData.noofrating;
 
       let newR =
-        (podcastIDData.rating * totalrating + rating) /
-        podcastIDData.noofrating;
-      console.log(newR);
-      console.log(
-        "podcastIDData.rating",
-        podcastIDData.rating,
-        typeof podcastIDData.rating
-      );
+        (podcastIDData.rating * podcastIDData.totalrating + rating) /
+        (podcastIDData.totalrating + 1);
 
-      console.log("totalrating", totalrating, typeof totalrating);
-      console.log("rating", rating, typeof rating);
-      console.log(
-        "podcastIDData.noofrating",
-        podcastIDData.noofrating,
-        typeof podcastIDData.noofrating
-      );
+      console.log(newR);
 
       return res.status(202).json({ msg: "User Rating Added", podcastIDData });
     } else {
