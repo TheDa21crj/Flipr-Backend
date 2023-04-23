@@ -145,7 +145,7 @@ const subscribeID = async (req, res, next) => {
       } else {
         console.log("Push ---- - ----");
         let add = await user.findOneAndUpdate(
-          { email: res.locals.userData.userEmail },
+          { email: res.s.userData.userEmail },
           {
             $push: {
               subscribe: id,
@@ -165,6 +165,14 @@ const subscribeID = async (req, res, next) => {
   }
 };
 
+const Rating = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+};
+
 exports.login = login;
+exports.Rating = Rating;
 exports.register = register;
 exports.subscribeID = subscribeID;
