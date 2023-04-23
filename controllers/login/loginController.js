@@ -257,7 +257,7 @@ const unSubscribe = async (req, res, next) => {
       });
 
       let addP;
-      if (padcastFind) {
+      if (padcastFind && padcastFind.subscribe > 0) {
         addP = await podcast.findOneAndUpdate(
           { _id: id },
           {
@@ -266,12 +266,13 @@ const unSubscribe = async (req, res, next) => {
             },
           }
         );
+        return res.status(202).json({ exists: true, userID });
+      } else {
+        return res.status(202).json({ exists: false });
       }
 
       console.log("padcastFind ---------- ---------- -----------");
       console.log(padcastFind);
-
-      return res.status(202).json({ exists: true, userID });
     }
     return res.status(400).json({ exists: false });
   } catch (err) {
