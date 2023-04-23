@@ -260,11 +260,15 @@ const Rating = async (req, res, next) => {
         _id: id,
       });
 
-      podcastIDData.rating =
-        (podcastIDData.rating + rating) / podcastIDData.subscribe;
+      // var totalrating = podcastIDData.noofrating;
+      // podcastIDData.noofrating = podcastIDData.noofrating + 1;
+
+      // podcastIDData.rating =
+      //   (podcastIDData.rating * totalrating + rating) /
+      //   podcastIDData.noofrating;
       console.log(podcastIDData);
 
-      return res.status(202).json({ msg: "User Rating Added", add });
+      return res.status(202).json({ msg: "User Rating Added", podcastIDData });
     } else {
       return res.status(304).json("No user found");
     }
