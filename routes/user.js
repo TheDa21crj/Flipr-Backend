@@ -25,6 +25,14 @@ router.post(
 // auth
 router.use(auth);
 
+// Public || Update User
+router.post(
+  "/UpdateUser",
+  [check("name", "name is Required").not().isEmpty()],
+  [check("bio", "bio is Required").not().isEmpty()],
+  loginController.UpdateUser
+);
+
 // Public || Add subscribe
 router.post(
   "/subscribe",
