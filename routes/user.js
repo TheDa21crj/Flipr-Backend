@@ -55,6 +55,9 @@ router.post(
   loginController.Rating
 );
 
+// Private || Add subData
+router.get("/subData", loginController.subData);
+
 // Public || Add Rating
 router.get("/createdPodcast", loginController.createdPodcast);
 
