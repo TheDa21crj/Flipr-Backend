@@ -190,6 +190,8 @@ const epByID = async (req, res, next) => {
     if (episodeID) {
       console.log(episodeID);
       return res.status(202).json(episodeID);
+    } else {
+      return res.status(304).json("DNE episodeID");
     }
   } catch (err) {
     const error = new HttpError("User not found", 500);
