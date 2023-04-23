@@ -67,10 +67,11 @@ const podcastbyID = async (req, res, next) => {
   try {
     let podcastID = await podcast
       .findOne({ _id: id })
-      .populate("episodes")
-      .populate("author");
+      // .populate("episodes")
+      .populate("author", "_id", "avatar");
 
     if (podcastID) {
+      console.log(podcastID);
       return res.status(202).json(podcastID);
     } else {
       return res.status(304).json("Does Not Exists");
