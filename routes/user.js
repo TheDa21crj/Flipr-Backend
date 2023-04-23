@@ -40,4 +40,7 @@ router.post(
   loginController.Rating
 );
 
+// Public || Add Rating
+router.get("/createdPodcast", loginController.createdPodcast);
+
 module.exports = router;
