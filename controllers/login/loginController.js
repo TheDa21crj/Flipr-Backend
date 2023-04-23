@@ -299,8 +299,6 @@ const Rating = async (req, res, next) => {
       "podcast.podcastID": id,
     });
 
-    console.log(userID);
-
     if (userID) {
       let add = await user.findOneAndUpdate(
         { email: res.locals.userData.userEmail, "podcast.podcastID": id },
@@ -315,13 +313,17 @@ const Rating = async (req, res, next) => {
         _id: id,
       });
 
-      // var totalrating = podcastIDData.noofrating;
-      // podcastIDData.noofrating = podcastIDData.noofrating + 1;
+      var totalrating = podcastIDData.totalrating;
+      podcastIDData.noofrating = podcastIDData.noofrating + 1;
 
-      // podcastIDData.rating =
-      //   (podcastIDData.rating * totalrating + rating) /
-      //   podcastIDData.noofrating;
-      console.log(podcastIDData);
+      podcastIDData.rating =
+        (podcastIDData.rating * totalrating + rating) /
+        podcastIDData.noofrating;
+
+      let newR =
+        (podcastIDData.rating * totalrating + rating) /
+        podcastIDData.noofrating;
+      console.log(newR);
 
       return res.status(202).json({ msg: "User Rating Added", podcastIDData });
     } else {
