@@ -216,10 +216,12 @@ const Rating = async (req, res, next) => {
       console.log("userID.podcast.rating = rating");
       // userID.podcast.rating = rating;
 
-      let newData = userID.podcast.filter((e) => {
-        console.log(e.podcastID, `new ObjectId("${id}")`);
-        e.podcastID == `new ObjectId("${id}")`;
-      });
+      console.log(userID.podcast);
+
+      // let newData = userID.podcast.filter((e) => {
+      //   console.log(e.podcastID, `new ObjectId("${id}")`);
+      //   e.podcastID == `new ObjectId("${id}")`;
+      // });
 
       // await userID.save();
 
