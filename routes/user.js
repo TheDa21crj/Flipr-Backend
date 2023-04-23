@@ -33,7 +33,7 @@ router.post(
 );
 
 // Private || Add Rating
-router.get(
+router.post(
   "/unSubscribe",
   [check("id", "id is Required").not().isEmpty()],
   loginController.unSubscribe
