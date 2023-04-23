@@ -12,6 +12,7 @@ const episodeSchema = new mongoose.Schema({
   podcast: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Podcast",
+    default: "",
   },
   thumbnail: {
     type: String,
