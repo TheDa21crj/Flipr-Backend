@@ -155,7 +155,7 @@ const subscribeID = async (req, res, next) => {
         { email: res.locals.userData.userEmail },
         {
           $push: {
-            podcast: id,
+            podcast: podcastdataSend,
           },
         }
       );
