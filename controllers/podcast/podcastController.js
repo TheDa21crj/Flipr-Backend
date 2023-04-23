@@ -67,8 +67,8 @@ const podcastbyID = async (req, res, next) => {
   try {
     let podcastID = await podcast
       .findOne({ _id: id })
-      // .populate("episodes")
-      .populate("author", "_id", "avatar");
+      .populate("episodes")
+      .populate("author", "_id name avatar bio");
 
     if (podcastID) {
       console.log(podcastID);
