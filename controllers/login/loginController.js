@@ -244,7 +244,7 @@ const unSubscribe = async (req, res, next) => {
 
     if (userID) {
       let padcatSuvAlready = await user.findOne({
-        "podcast.podcastID": id,
+        "podcast.$.podcastID": id,
       });
 
       if (padcatSuvAlready) {
