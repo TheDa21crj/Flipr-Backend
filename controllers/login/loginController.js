@@ -386,11 +386,16 @@ const subData = async (req, res, next) => {
       email: res.locals.userData.userEmail,
     });
 
-    let reqData = userID.podcast.filter((e) => {});
+    let reqData = userID.podcast.filter((e) => {
+      if (e.subscribed === true) {
+        return e;
+      }
+    });
 
-    console.log(userID.podcast);
+    console.log("reqData==================");
+    console.log(reqData);
 
-    return res.status(202).json({ state: "User", userID });
+    return res.status(202).json({ state: "found", reqData });
   } catch (err) {
     const error = new HttpError("Error error generating token", 401);
     console.log(err);
