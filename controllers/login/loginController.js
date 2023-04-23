@@ -260,6 +260,8 @@ const Rating = async (req, res, next) => {
         _id: id,
       });
 
+      podcastIDData.rating =
+        (podcastIDData.rating + rating) / podcastIDData.subscribe;
       console.log(podcastIDData);
 
       return res.status(202).json({ msg: "User Rating Added", add });
