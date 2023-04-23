@@ -32,7 +32,7 @@ const upload = multer({
 
     console.log(ext);
 
-    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mov") {
+    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mov" && ext !== ".mp3") {
       return cb(new Error("Only videos and audio are allowed!"));
     }
     cb(null, true);
