@@ -8,76 +8,79 @@ const { getVideoDurationInSeconds } = require("get-video-duration");
 
 // Backendurl/public/videos/file_name.mp4
 const createPodcast = async (req, res) => {
-  const { title, des, thumbnail, podcastIDBody, season } = req.body;
+  const { title, des, thumbnail, podcastIDBody, season, flag } = req.body;
 
   console.table(req.body);
 
-  let videosPaths = [];
+  if (flag) {
+    let videosPaths = [];
 
-  if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-    for (let video of req.files.videos) {
-      videosPaths.push("/" + video.path);
-    }
-  }
-
-  // let thumbnailPaths = [];
-
-  // if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
-  //   for (let video of req.files.thumbnail) {
-  //     thumbnailPaths.push("/" + video.path);
-  //   }
-  // }
-
-  try {
-    const createdMedia = await episode.create({
-      title,
-      des,
-      thumbnail,
-      podcast: podcastIDBody,
-      season,
-      videos: videosPaths,
-    });
-
-    let episodeID = await episode.findOne({ videos: videosPaths });
-    let podcastID = await podcast.findOne({ _id: podcastIDBody });
-
-    console.log(episodeID._id);
-    console.log("podcastID.episodes");
-
-    if (podcastID.episodes.length === 0) {
-      console.log("+Add ---- - ----");
-      podcastID.episodes = episodeID._id;
-      await podcastID.save();
-    } else {
-      console.log("Push ---- - ----");
-      let add = await podcast.findOneAndUpdate(
-        { _id: podcastIDBody },
-        {
-          $push: {
-            episodes: episodeID._id,
-          },
-        }
-      );
+    if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+      for (let video of req.files.videos) {
+        videosPaths.push("/" + video.path);
+      }
     }
 
-    // `${BACKEND_URI}/api/media/all`
-    // console.log(`http://localhost:5000${videosPaths[0]}`);
+    // let thumbnailPaths = [];
 
-    // const videoPath = "path/to/video.mp4";
-    // ffmpeg.ffprobe(videoPath, (err, metadata) => {
-    //   if (err) {
-    //     console.error(err);
-    //     res.sendStatus(500);
-    //     return;
+    // if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
+    //   for (let video of req.files.thumbnail) {
+    //     thumbnailPaths.push("/" + video.path);
     //   }
-    //   const duration = metadata.format.duration;
-    //   console.log(duration);
-    // });
+    // }
 
-    res.json({ message: "Media created successfully", createdMedia });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
+    try {
+      const createdMedia = await episode.create({
+        title,
+        des,
+        thumbnail,
+        podcast: podcastIDBody,
+        season,
+        videos: videosPaths,
+      });
+
+      let episodeID = await episode.findOne({ videos: videosPaths });
+      let podcastID = await podcast.findOne({ _id: podcastIDBody });
+
+      console.log(episodeID._id);
+      console.log("podcastID.episodes");
+
+      if (podcastID.episodes.length === 0) {
+        console.log("+Add ---- - ----");
+        podcastID.episodes = episodeID._id;
+        await podcastID.save();
+      } else {
+        console.log("Push ---- - ----");
+        let add = await podcast.findOneAndUpdate(
+          { _id: podcastIDBody },
+          {
+            $push: {
+              episodes: episodeID._id,
+            },
+          }
+        );
+      }
+
+      // `${BACKEND_URI}/api/media/all`
+      // console.log(`http://localhost:5000${videosPaths[0]}`);
+
+      // const videoPath = "path/to/video.mp4";
+      // ffmpeg.ffprobe(videoPath, (err, metadata) => {
+      //   if (err) {
+      //     console.error(err);
+      //     res.sendStatus(500);
+      //     return;
+      //   }
+      //   const duration = metadata.format.duration;
+      //   console.log(duration);
+      // });
+
+      res.json({ message: "Media created successfully", createdMedia });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json(error);
+    }
+  } else {
   }
 };
 
