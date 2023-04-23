@@ -33,6 +33,9 @@ router.post(
 );
 
 // Private || Add Rating
+router.get("/createdPodcast", loginController.createdPodcast);
+
+// Private || Add Rating
 router.post(
   "/Rating",
   [check("id", "id is Required").not().isEmpty()],
