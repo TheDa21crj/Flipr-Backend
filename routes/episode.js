@@ -49,9 +49,6 @@ router.post(
 // auth
 router.use(auth);
 
-//get all media
-// router.get("/all", mediaController.getAll);
-
 // Private || Post Create New
 router.post(
   "/create",
