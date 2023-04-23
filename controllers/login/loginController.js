@@ -230,6 +230,7 @@ const subscribeID = async (req, res, next) => {
   }
 };
 
+// Private || Rating
 const Rating = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
