@@ -186,15 +186,15 @@ const epByID = async (req, res, next) => {
   try {
     let episodeID = await episode.findOne({ _id: id });
 
+    console.log("episodeID");
     if (episodeID) {
+      console.log(episodeID);
       return res.status(202).json(episodeID);
     }
   } catch (err) {
     const error = new HttpError("User not found", 500);
     return next(error);
   }
-
-  console.log("first");
 };
 
 exports.createPodcast = createPodcast;
