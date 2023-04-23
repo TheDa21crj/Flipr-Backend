@@ -19,6 +19,10 @@ const podcastSchema = new mongoose.Schema({
     type: "Number",
     default: 0,
   },
+  noofrating: {
+    type: "Number",
+    default: 0,
+  },
   episodes: [
     {
       type: mongoose.Schema.Types.ObjectId,
