@@ -19,8 +19,9 @@ const podcastSchema = new mongoose.Schema({
     type: "Number",
     default: 0,
   },
-  noofrating: {
+  totalrating: {
     type: "Number",
+    required: true,
     default: 10,
   },
   episodes: [
