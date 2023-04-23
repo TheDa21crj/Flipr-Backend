@@ -50,9 +50,14 @@ const createPodcast = async (req, res, next) => {
       console.log("newPodcastCreated==========");
       console.log(newPodcastCreated);
 
-      userE.createdPodcast = newPodcast._id;
-
-      await userE.save();
+      let add = await user.findOneAndUpdate(
+        { email: res.locals.userData.userEmail },
+        {
+          $push: {
+            createdPodcast: newPodcast._id,
+          },
+        }
+      );
 
       return res.json({ state: "success" });
     } catch (err) {
