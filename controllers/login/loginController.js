@@ -137,11 +137,33 @@ const subscribeID = async (req, res, next) => {
 
     if (userID) {
       if (userID.podcast.length > 0) {
-        for (let i = 0; i < userID.podcast.length; i++) {
-          if (userID.podcast[i].podcastID === id) {
-            console.log(userID.podcast[i].podcastID, "\t", id);
-            return res.status(400).json({ message: "Already Subscribe" });
-          }
+        console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+
+        let padcatSuvAlready = await user.findOne({
+          "podcast.podcastID": id,
+        });
+
+        if (padcatSuvAlready) {
+          return res.status(400).json({ exists: true });
+        } else {
+          console.log("+Add ---- - ---- true");
+
+          let podcastdataSend = {};
+          podcastdataSend.podcastID = id;
+          podcastdataSend.subscribed = true;
+
+          console.log(podcastdataSend);
+          console.table(podcastdataSend);
+
+          let add = await user.findOneAndUpdate(
+            { email: res.locals.userData.userEmail },
+            {
+              $push: {
+                podcast: podcastdataSend,
+              },
+            }
+          );
+          return res.status(200).json({ state: "success" });
         }
       } else {
         console.log("+Add ---- - ----");
@@ -153,8 +175,6 @@ const subscribeID = async (req, res, next) => {
         console.log(podcastdataSend);
         console.table(podcastdataSend);
 
-        // userID.subscribe = id;
-        //   await userID.save();
         let add = await user.findOneAndUpdate(
           { email: res.locals.userData.userEmail },
           {
@@ -163,17 +183,6 @@ const subscribeID = async (req, res, next) => {
             },
           }
         );
-        // } else {
-        // console.log("Push ---- - ----");
-        //   // let add = await user.findOneAndUpdate(
-        //   //   { email: res.s.userData.userEmail },
-        //   //   {
-        //   //     $push: {
-        //   //       subscribe: id,
-        //   //     },
-        //   //   }
-        //   // );
-        // }
 
         return res.status(200).json({ state: "success" });
       }
