@@ -136,42 +136,47 @@ const subscribeID = async (req, res, next) => {
     const userID = await user.findOne({ email: res.locals.userData.userEmail });
 
     if (userID) {
-      console.log(userID);
-      console.table(userID.podcast);
-
-      // if (userID.podcast.length === 0) {
-      console.log("+Add ---- - ----");
-
-      let podcastdataSend = {};
-      podcastdataSend.podcastID = id;
-      podcastdataSend.subscribed = true;
-
-      console.log(podcastdataSend);
-      console.table(podcastdataSend);
-
-      //   // userID.subscribe = id;
-      //   await userID.save();
-      let add = await user.findOneAndUpdate(
-        { email: res.locals.userData.userEmail },
-        {
-          $push: {
-            podcast: podcastdataSend,
-          },
+      if (userID.podcast.length > 0) {
+        for (let i = 0; i < userID.podcast.length; i++) {
+          if (userID.podcast[i].podcastID === id) {
+            console.log(userID.podcast[i].podcastID, "\t", id);
+            return res.status(400).json({ message: "Already Subscribe" });
+          }
         }
-      );
-      // } else {
-      console.log("Push ---- - ----");
-      //   // let add = await user.findOneAndUpdate(
-      //   //   { email: res.s.userData.userEmail },
-      //   //   {
-      //   //     $push: {
-      //   //       subscribe: id,
-      //   //     },
-      //   //   }
-      //   // );
-      // }
+      } else {
+        console.log("+Add ---- - ----");
 
-      return res.status(200).json({ state: "success" });
+        let podcastdataSend = {};
+        podcastdataSend.podcastID = id;
+        podcastdataSend.subscribed = true;
+
+        console.log(podcastdataSend);
+        console.table(podcastdataSend);
+
+        // userID.subscribe = id;
+        //   await userID.save();
+        let add = await user.findOneAndUpdate(
+          { email: res.locals.userData.userEmail },
+          {
+            $push: {
+              podcast: podcastdataSend,
+            },
+          }
+        );
+        // } else {
+        // console.log("Push ---- - ----");
+        //   // let add = await user.findOneAndUpdate(
+        //   //   { email: res.s.userData.userEmail },
+        //   //   {
+        //   //     $push: {
+        //   //       subscribe: id,
+        //   //     },
+        //   //   }
+        //   // );
+        // }
+
+        return res.status(200).json({ state: "success" });
+      }
     } else {
       return res.status(404).json("No User");
     }
