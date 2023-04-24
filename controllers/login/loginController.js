@@ -381,6 +381,15 @@ const UpdateUser = async (req, res, next) => {
 };
 
 const subData = async (req, res, next) => {
+  console.log(
+    "-------------------------------------------------------------------------------------"
+  );
+  console.log(
+    "-------------------------------------------------------------------------------------"
+  );
+  console.log(
+    "-------------------------------------------------------------------------------------"
+  );
   try {
     const userID = await user.findOne({
       email: res.locals.userData.userEmail,
