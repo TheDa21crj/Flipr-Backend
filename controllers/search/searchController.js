@@ -21,19 +21,13 @@ const searchData = async (req, res, next) => {
 
 //Public || Podcast by Podcast ID
 const searchLetterData = async (req, res, next) => {
-  const query = req.query.q;
-  const firstLetter = query.charAt(0);
+  const query = req.params.query;
 
   console.log(query);
 
   try {
-    const records = await podcast.find({
-      title: { $regex: "^" + firstLetter },
-    });
-    const filteredRecords = records.filter((record) =>
-      record.title.toLowerCase().includes(query.toLowerCase())
-    );
-    res.json(filteredRecords);
+    const result = await podcast.find({ title: { $regex: query } });
+    res.json(result);
   } catch (err) {
     console.log(err);
     const error = new HttpError("Server Error", 400);
