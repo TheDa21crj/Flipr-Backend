@@ -58,6 +58,13 @@ router.post(
   podcastController.podcastAll
 );
 
+// Public || All category podcast ||
+router.post(
+  "/podcastAllCat",
+  [check("category", "category is Required").not().isEmpty()],
+  podcastController.podcastAllCat
+);
+
 // Public || All Podcast || wt Type
 router.get("/podcastAllType", podcastController.podcastAllType);
 
