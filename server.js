@@ -39,6 +39,7 @@ app.post("/test", (req, res) => {
   console.log(req.body);
   res.send("hello");
 });
+app.use("/api/search", require("./routes/search"));
 app.use("/api/user", require("./routes/user"));
 app.use("/api/podcast", require("./routes/podcast"));
 app.use("/api/episode", require("./routes/episode"));
