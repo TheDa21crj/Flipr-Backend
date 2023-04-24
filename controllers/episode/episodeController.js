@@ -76,11 +76,9 @@ const editThumbnail = async (req, res, next) => {
 
   try {
     // let episodeData = await episode.findOne({ _id: id });
-    let episodeData = await episode
-      .findOne({
-        _id: "64465d93f56096815b11e935",
-      })
-      .lean();
+    let episodeData = await episode.findOne({
+      _id: "64465d93f56096815b11e935",
+    });
 
     console.log("episodeData========---------------------------");
     console.log(episodeData);
@@ -91,13 +89,19 @@ const editThumbnail = async (req, res, next) => {
       temp.thumbnail = videosPaths;
       console.log(temp);
 
-      await episodeData.save(temp);
+      episodeData.podcast = temp.podcast;
+      episodeData.thumbnail = temp.thumbnail;
+
+      console.log(episodeData);
+
+      await episodeData.save();
 
       return res.status(202).json({ state: true });
     } else {
       return res.status(304).json({ state: false });
     }
   } catch (err) {
+    console.log(err);
     const error = new HttpError("Error", 400);
     return next(error);
   }
