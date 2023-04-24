@@ -5,10 +5,12 @@ const podcastSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    text: true,
   },
   des: {
     type: String,
     required: true,
+    text: true,
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
