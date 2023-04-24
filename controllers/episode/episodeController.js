@@ -103,6 +103,7 @@ const createPodcast = async (req, res) => {
       episodeData.videos = videosPaths;
 
       console.log(episodeData);
+
       await episodeData.save();
 
       return res.status(202).json({ edit: true });
