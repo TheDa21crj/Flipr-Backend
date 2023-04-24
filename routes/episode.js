@@ -32,7 +32,15 @@ const upload = multer({
 
     console.log(ext);
 
-    if (ext !== ".mkv" && ext !== ".mp4" && ext !== ".mov" && ext !== ".mp3") {
+    if (
+      ext !== ".mkv" &&
+      ext !== ".mp4" &&
+      ext !== ".mov" &&
+      ext !== ".mp3" &&
+      ext != ".png" &&
+      ext != ".jpeg" &&
+      ext != ".jpg"
+    ) {
       return cb(new Error("Only videos and audio are allowed!"));
     }
     cb(null, true);
@@ -64,8 +72,14 @@ router.post(
 // Private || Change Thumbnail
 router.post(
   "/editThumbnail",
-  [check("episodeID", "episodeID is Required").not().isEmpty()],
-  [check("thumbnail", "thumbnail is Required").not().isEmpty()],
+  // [check("episodeID", "episodeID is Required").not().isEmpty()],
+  // [check("thumbnail", "thumbnail is Required").not().isEmpty()],
+  upload.fields([
+    {
+      name: "thumbnail",
+      maxCount: 1,
+    },
+  ]),
   mediaController.editThumbnail
 );
 
