@@ -5,19 +5,29 @@ const { check, validationResult } = require("express-validator");
 
 //Public || Podcast by Podcast ID
 const searchData = async (req, res, next) => {
-  const { query } = req.query.q;
+  const query = req.query.q;
+
+  console.log(query);
 
   try {
-    // Search the database for matching records
-    podcast.find({ $text: { $search: query } }, function (err, records) {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Internal Server Error" });
-      }
+    const records = await podcast.find({ $text: { $search: query } });
+    res.status(202).json(records);
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Server Error", 400);
+    return next(error);
+  }
+};
 
-      // Return the matching records
-      res.json(records);
-    });
+//Public || Podcast by Podcast ID
+const searchLetterData = async (req, res, next) => {
+  const query = req.query.q;
+
+  console.log(query);
+
+  try {
+    const records = await podcast.find({ $text: { $search: query } });
+    res.status(202).json(records);
   } catch (err) {
     console.log(err);
     const error = new HttpError("Server Error", 400);
@@ -26,3 +36,4 @@ const searchData = async (req, res, next) => {
 };
 
 exports.searchData = searchData;
+exports.searchLetterData = searchLetterData;
