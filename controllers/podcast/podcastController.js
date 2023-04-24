@@ -197,9 +197,32 @@ const podcastAllType = async (req, res, next) => {
   }
 };
 
+// Public || Podcast by category
+const podcastAllCat = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { category } = req.body;
+
+  console.log("==============");
+  console.log(category);
+
+  try {
+    let podcastID = await podcast.find({ category });
+    return res.status(202).json(podcastID);
+  } catch (err) {
+    console.log(err);
+    const error = new HttpError("Error", 400);
+    return next(error);
+  }
+};
+
 exports.podcastAll = podcastAll;
 exports.podcastbyID = podcastbyID;
-exports.createPodcast = createPodcast;
 exports.seasonPodcast = seasonPodcast;
+exports.podcastAllCat = podcastAllCat;
+exports.createPodcast = createPodcast;
 exports.podcastAllType = podcastAllType;
 exports.podcastTrending = podcastTrending;
