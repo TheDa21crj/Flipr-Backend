@@ -39,7 +39,7 @@ router.post(
   loginController.subscribeID
 );
 
-// Private || Add unSubscribe
+// Private || UnSubscribe
 router.post(
   "/unSubscribe",
   [check("id", "id is Required").not().isEmpty()],
