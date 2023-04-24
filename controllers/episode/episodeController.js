@@ -20,14 +20,6 @@ const createPodcast = async (req, res) => {
     }
   }
 
-  // let thumbnailPaths = [];
-
-  // if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
-  //   for (let video of req.files.thumbnail) {
-  //     thumbnailPaths.push("/" + video.path);
-  //   }
-  // }
-
   try {
     const createdMedia = await episode.create({
       title,
