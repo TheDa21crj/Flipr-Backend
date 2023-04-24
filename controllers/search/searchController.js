@@ -26,7 +26,9 @@ const searchLetterData = async (req, res, next) => {
   console.log(query);
 
   try {
-    const result = await podcast.find({ title: { $regex: query } });
+    const result = await podcast.find({
+      title: { $regex: query, $options: "i" },
+    });
     res.json(result);
   } catch (err) {
     console.log(err);
