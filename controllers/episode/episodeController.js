@@ -51,7 +51,11 @@ const createPodcast = async (req, res) => {
       );
     }
 
-    res.json({ message: "Media created successfully", createdMedia });
+    res.json({
+      message: "Media created successfully",
+      createdMedia,
+      episodeID,
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json(error);
