@@ -13,102 +13,102 @@ const createPodcast = async (req, res) => {
   console.table(req.body);
 
   // create
-  if (flag === true) {
-    let videosPaths = [];
+  // if (flag === true) {
+  let videosPaths = [];
 
-    if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-      for (let video of req.files.videos) {
-        videosPaths.push("/" + video.path);
-      }
-    }
-
-    // let thumbnailPaths = [];
-
-    // if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
-    //   for (let video of req.files.thumbnail) {
-    //     thumbnailPaths.push("/" + video.path);
-    //   }
-    // }
-
-    try {
-      const createdMedia = await episode.create({
-        title,
-        des,
-        thumbnail,
-        podcast: podcastIDBody,
-        season,
-        videos: videosPaths,
-      });
-
-      let episodeID = await episode.findOne({ videos: videosPaths });
-      let podcastID = await podcast.findOne({ _id: podcastIDBody });
-
-      console.log(episodeID._id);
-      console.log("podcastID.episodes");
-
-      if (podcastID.episodes.length === 0) {
-        console.log("+Add ---- - ----");
-        podcastID.episodes = episodeID._id;
-        await podcastID.save();
-      } else {
-        console.log("Push ---- - ----");
-        let add = await podcast.findOneAndUpdate(
-          { _id: podcastIDBody },
-          {
-            $push: {
-              episodes: episodeID._id,
-            },
-          }
-        );
-      }
-
-      // `${BACKEND_URI}/api/media/all`
-      // console.log(`http://localhost:5000${videosPaths[0]}`);
-
-      // const videoPath = "path/to/video.mp4";
-      // ffmpeg.ffprobe(videoPath, (err, metadata) => {
-      //   if (err) {
-      //     console.error(err);
-      //     res.sendStatus(500);
-      //     return;
-      //   }
-      //   const duration = metadata.format.duration;
-      //   console.log(duration);
-      // });
-
-      res.json({ message: "Media created successfully", createdMedia });
-    } catch (error) {
-      console.log(error);
-      res.status(400).json(error);
-    }
-  } else {
-    // edit
-    // let episodeData = episode.findOne({ _id: req.body.id });
-    let episodeData = await episode.findOne({
-      _id: "64457028e4b8ad14939ea4c9",
-    });
-    if (episodeData) {
-      let videosPaths = [];
-
-      if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-        for (let video of req.files.videos) {
-          videosPaths.push("/" + video.path);
-        }
-      }
-
-      episodeData.title = title;
-      episodeData.des = des;
-      episodeData.thumbnail = thumbnail;
-      episodeData.season = season;
-      episodeData.videos = videosPaths;
-
-      console.log(episodeData);
-
-      await episodeData.save();
-
-      return res.status(202).json({ edit: true });
+  if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+    for (let video of req.files.videos) {
+      videosPaths.push("/" + video.path);
     }
   }
+
+  // let thumbnailPaths = [];
+
+  // if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
+  //   for (let video of req.files.thumbnail) {
+  //     thumbnailPaths.push("/" + video.path);
+  //   }
+  // }
+
+  try {
+    const createdMedia = await episode.create({
+      title,
+      des,
+      thumbnail,
+      podcast: podcastIDBody,
+      season,
+      videos: videosPaths,
+    });
+
+    let episodeID = await episode.findOne({ videos: videosPaths });
+    let podcastID = await podcast.findOne({ _id: podcastIDBody });
+
+    console.log(episodeID._id);
+    console.log("podcastID.episodes");
+
+    if (podcastID.episodes.length === 0) {
+      console.log("+Add ---- - ----");
+      podcastID.episodes = episodeID._id;
+      await podcastID.save();
+    } else {
+      console.log("Push ---- - ----");
+      let add = await podcast.findOneAndUpdate(
+        { _id: podcastIDBody },
+        {
+          $push: {
+            episodes: episodeID._id,
+          },
+        }
+      );
+    }
+
+    // `${BACKEND_URI}/api/media/all`
+    // console.log(`http://localhost:5000${videosPaths[0]}`);
+
+    // const videoPath = "path/to/video.mp4";
+    // ffmpeg.ffprobe(videoPath, (err, metadata) => {
+    //   if (err) {
+    //     console.error(err);
+    //     res.sendStatus(500);
+    //     return;
+    //   }
+    //   const duration = metadata.format.duration;
+    //   console.log(duration);
+    // });
+
+    res.json({ message: "Media created successfully", createdMedia });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+  // } else {
+  // edit
+  // let episodeData = episode.findOne({ _id: req.body.id });
+  // let episodeData = await episode.findOne({
+  //   _id: "64457028e4b8ad14939ea4c9",
+  // });
+  // if (episodeData) {
+  //   let videosPaths = [];
+
+  //   if (Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+  //     for (let video of req.files.videos) {
+  //       videosPaths.push("/" + video.path);
+  //     }
+  //   }
+
+  //   episodeData.title = title;
+  //   episodeData.des = des;
+  //   episodeData.thumbnail = thumbnail;
+  //   episodeData.season = season;
+  //   episodeData.videos = videosPaths;
+
+  //   console.log(episodeData);
+
+  //   await episodeData.save();
+
+  //   return res.status(202).json({ edit: true });
+  // }
+  // }
 };
 
 // Private ||
