@@ -403,10 +403,38 @@ const subData = async (req, res, next) => {
   }
 };
 
+// Private || check sub
+const checkSub = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.body;
+
+  try {
+    const userID = await user.findOne({
+      email: res.locals.userData.userEmail,
+      "podcast.podcastID": id,
+    });
+
+    if (userID) {
+      return res.status(202).json({ state: true });
+    } else {
+      return res.status(202).json({ state: false });
+    }
+  } catch (err) {
+    const error = new HttpError("Error error generating token", 401);
+    console.log(err);
+    return next(error);
+  }
+};
+
 exports.login = login;
 exports.Rating = Rating;
 exports.subData = subData;
 exports.register = register;
+exports.checkSub = checkSub;
 exports.UpdateUser = UpdateUser;
 exports.unSubscribe = unSubscribe;
 exports.subscribeID = subscribeID;

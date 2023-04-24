@@ -54,6 +54,13 @@ router.post(
   loginController.Rating
 );
 
+// Private || Add Rating
+router.post(
+  "/checkSub",
+  [check("id", "id is Required").not().isEmpty()],
+  loginController.checkSub
+);
+
 // Private || Add subData
 router.get("/subData", loginController.subData);
 
