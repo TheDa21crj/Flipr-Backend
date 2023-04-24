@@ -72,8 +72,6 @@ router.post(
 // Private || Change Thumbnail
 router.post(
   "/editThumbnail",
-  // [check("episodeID", "episodeID is Required").not().isEmpty()],
-  // [check("thumbnail", "thumbnail is Required").not().isEmpty()],
   upload.fields([
     {
       name: "thumbnail",
