@@ -63,7 +63,7 @@ const createPodcast = async (req, res) => {
 };
 
 // Private ||
-const editThumbnail = async (req, res) => {
+const editThumbnail = async (req, res, next) => {
   const { id } = req.body;
 
   let videosPaths = [];
@@ -76,6 +76,11 @@ const editThumbnail = async (req, res) => {
 
   try {
     let episodeData = episode.findOne({ _id: id });
+    // let episodeData = episode.findOne({ _id: "64465695a7054f9de06d2bef" });
+
+    console.log("episodeData========---------------------------");
+    console.log(episodeData);
+
     if (episodeData) {
       episodeData.thumbnail = videosPaths;
 
