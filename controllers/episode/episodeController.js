@@ -75,10 +75,7 @@ const editThumbnail = async (req, res, next) => {
   }
 
   try {
-    // let episodeData = await episode.findOne({ _id: id });
-    let episodeData = await episode.findOne({
-      _id: "64465d93f56096815b11e935",
-    });
+    let episodeData = await episode.findOne({ _id: id });
 
     console.log("episodeData========---------------------------");
     console.log(episodeData);
