@@ -12,6 +12,6 @@ router.use(auth);
 router.get("/", searchController.searchData);
 
 // Search
-router.get("/leeterwise", searchController.searchLetterData);
+router.get("/leeterwise/:query", searchController.searchLetterData);
 
 module.exports = router;
