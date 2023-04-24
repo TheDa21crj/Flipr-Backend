@@ -410,7 +410,11 @@ const checkSub = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
+  console.log(res.locals.userData.userEmail);
+
   const { id } = req.body;
+
+  console.log(id);
 
   try {
     const userID = await user.findOne({
