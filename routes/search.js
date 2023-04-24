@@ -5,10 +5,6 @@ const { check } = require("express-validator");
 const router = express.Router();
 
 // Search
-router.get(
-  "/searchData",
-  [check("query", "query is Required").not().isEmpty()],
-  searchController.searchData
-);
+router.get("/searchData", searchController.searchData);
 
 module.exports = router;
