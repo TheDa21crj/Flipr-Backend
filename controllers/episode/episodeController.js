@@ -64,17 +64,20 @@ const createPodcast = async (req, res) => {
 
 // Private ||
 const editThumbnail = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+  const { id } = req.body;
+
+  let videosPaths = [];
+
+  if (Array.isArray(req.files.thumbnail) && req.files.thumbnail.length > 0) {
+    for (let video of req.files.thumbnail) {
+      videosPaths.push("/" + video.path);
+    }
   }
 
-  const { episodeID, thumbnail } = req.body;
-
   try {
-    let episodeData = episode.findOne({ _id: episodeID });
+    let episodeData = episode.findOne({ _id: id });
     if (episodeData) {
-      episodeData.thumbnail = thumbnail;
+      episodeData.thumbnail = videosPaths;
 
       await episodeData.save();
     } else {
