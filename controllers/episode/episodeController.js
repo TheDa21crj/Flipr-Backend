@@ -75,21 +75,30 @@ const editThumbnail = async (req, res, next) => {
   }
 
   try {
-    let episodeData = episode.findOne({ _id: id });
-    // let episodeData = episode.findOne({ _id: "64465695a7054f9de06d2bef" });
+    // let episodeData = await episode.findOne({ _id: id });
+    let episodeData = await episode
+      .findOne({
+        _id: "64465d93f56096815b11e935",
+      })
+      .lean();
 
     console.log("episodeData========---------------------------");
     console.log(episodeData);
 
     if (episodeData) {
-      episodeData.thumbnail = videosPaths;
+      let temp = episodeData;
+      console.log(temp);
+      temp.thumbnail = videosPaths;
+      console.log(temp);
 
-      await episodeData.save();
+      await episodeData.save(temp);
+
+      return res.status(202).json({ state: true });
     } else {
-      return res.status(202).json({ state: false });
+      return res.status(304).json({ state: false });
     }
   } catch (err) {
-    const error = new HttpError("User not found", 500);
+    const error = new HttpError("Error", 400);
     return next(error);
   }
 };
