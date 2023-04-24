@@ -6,9 +6,9 @@ const router = express.Router();
 
 // Search
 router.get(
-  "/subData",
+  "/searchData",
   [check("query", "query is Required").not().isEmpty()],
-  searchController.subData
+  searchController.searchData
 );
 
 module.exports = router;
